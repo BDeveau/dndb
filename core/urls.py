@@ -11,6 +11,5 @@ import hello.views
 
 urlpatterns = [
     url(r'^$', db.views.index, name='index'),
-    url(r'^db', db.views.db, name='db'),
     url(r'^admin/', include(admin.site.urls)),
 ]
