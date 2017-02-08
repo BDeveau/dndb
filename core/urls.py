@@ -3,7 +3,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-import hello.views
+import db.views
 
 # Examples:
 # url(r'^$', 'core.views.home', name='home'),
