@@ -10,10 +10,10 @@ def index(request):
 
 def locations(request):
     return render(request, 'locations.html', {
-        'locations' = Location.objects.all()
+        'locations': Location.objects.all()
     })
     
 def characters(request):
     return render(request, 'characters.html', {
-        'characters' = Character.objects.all()
+        'characters': Character.objects.all()
     })
