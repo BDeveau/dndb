@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import ListView
 
 from .models import Location, Character
 
@@ -16,5 +15,5 @@ def locations(request):
     
 def characters(request):
     return render(request, 'characters.html', {
-        'characters' = Location.objects.all()
+        'characters' = Character.objects.all()
     })
