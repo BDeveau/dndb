@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <ul>
+    {% for location in locations %}
+        <li>{{ location.location_name }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

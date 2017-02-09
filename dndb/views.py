@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import ListView
 
 from .models import Location, Character
 
@@ -8,3 +9,12 @@ def index(request):
     # return HttpResponse('Hello from Python!')
     return render(request, 'index.html')
 
+def locations(request):
+    return render(request, 'locations.html', {
+        'locations' = Location.objects.all()
+    })
+    
+def characters(request):
+    return render(request, 'characters.html', {
+        'characters' = Location.objects.all()
+    })

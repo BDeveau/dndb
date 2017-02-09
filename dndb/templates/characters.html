@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <ul>
+    {% for character in characters %}
+        <li>{{ character.character_name }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
