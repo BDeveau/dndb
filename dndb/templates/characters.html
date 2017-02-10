@@ -2,9 +2,27 @@
 {% load staticfiles %}
 
 {% block content %}
-    <ul>
-    {% for character in characters %}
-        <li>{{ character.character_name }}</li>
-    {% endfor %}
-    </ul>
+<div class="panel panel-default">
+    <div class="panel-heading headerText">Characters</div>
+    <div class="panel-body bodyText">
+        <p>A listing of all characters we've met, NPC or otherwise.</p>
+    </div>
+
+    <table class='table datatable'>
+        <tr>
+            <th class='headerText'>Name</th>
+            <th class='headerText'>Title</th>
+            <th class='headerText'>Location</th>
+        </tr>
+
+        {% for character in characters %}
+        <tr>
+            <td class='bodyText'>{{ character.character_name }}</td>
+            <td class='bodyText'>N/A</td>
+            <td class='bodyText'>{{ character.character_location.location_name }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
 {% endblock %}
