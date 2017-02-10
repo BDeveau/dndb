@@ -14,7 +14,7 @@ class Location(models.Model):
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.location_name
+        return self.name
     
 class Character(models.Model):
     name = models.CharField(max_length=50)
@@ -26,4 +26,4 @@ class Character(models.Model):
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.character_name
+        return self.name
