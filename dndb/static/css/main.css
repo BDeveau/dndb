@@ -4,5 +4,6 @@
 .headerText {
     /*font-family: 'Bahiana', cursive;*/
     font-family: 'Pangolin', cursive;
-    font-size: 22px;
+    font-size: 20px;
+    font-weight: normal;
 }
