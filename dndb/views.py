@@ -17,6 +17,7 @@ def user_login(request):
         # Redirect to a success page.
     else:
         # Return an 'invalid login' error message.
+        redirect('/')
 
 def locations(request):
     return render(request, 'locations.html', {
