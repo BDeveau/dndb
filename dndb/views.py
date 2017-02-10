@@ -15,10 +15,8 @@ def user_login(request):
     if user is not None:
         login(request, user)
         # Redirect to a success page.
-        ...
     else:
         # Return an 'invalid login' error message.
-        ...
 
 def locations(request):
     return render(request, 'locations.html', {
