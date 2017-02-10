@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 class Campaign(models.Model):
     name = models.CharField(max_length=50)
     users = models.ManyToManyField(User)
+    
+    def __str__(self):
+        return self.name
 
 class Location(models.Model):
     name = models.CharField(max_length=50)
