@@ -13,15 +13,13 @@
     <table class='table datatable'>
         <tr>
             <th class='headerText'>Name</th>
-            <th class='headerText'>Title</th>
-            <th class='headerText'>Location</th>
+            <th class='headerText'>Part Of</th>
         </tr>
 
-        {% for character in characters %}
+        {% for location in locations %}
         <tr>
-            <td class='bodyText'>{{ character.name }}</td>
-            <td class='bodyText'>{{ character.title }}</td>
-            <td class='bodyText'>{{ character.location.name }}</td>
+            <td class='bodyText'>{{ location.name }}</td>
+            <td class='bodyText'>{{ location.parent }}</td>
         </tr>
         {% endfor %}
 
