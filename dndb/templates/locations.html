@@ -2,9 +2,29 @@
 {% load staticfiles %}
 
 {% block content %}
-    <ul>
-    {% for location in locations %}
-        <li>{{ location.location_name }}</li>
-    {% endfor %}
-    </ul>
+<div class="panel panel-default">
+    <div class="panel-heading headerText">Locations</div>
+    <div class="panel-body bodyText">
+        <p>A listing of all places we've been or know of. In this case a Location can be a country,
+        or a city, or a village, or even just a store. Locations are generic and can be assigned as
+        being a part of another Location. I might flesh this out later..</p>
+    </div>
+
+    <table class='table datatable'>
+        <tr>
+            <th class='headerText'>Name</th>
+            <th class='headerText'>Title</th>
+            <th class='headerText'>Location</th>
+        </tr>
+
+        {% for character in characters %}
+        <tr>
+            <td class='bodyText'>{{ character.name }}</td>
+            <td class='bodyText'>{{ character.title }}</td>
+            <td class='bodyText'>{{ character.location.name }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
 {% endblock %}

@@ -17,9 +17,9 @@
 
         {% for character in characters %}
         <tr>
-            <td class='bodyText'>{{ character.character_name }}</td>
-            <td class='bodyText'>N/A</td>
-            <td class='bodyText'>{{ character.character_location.location_name }}</td>
+            <td class='bodyText'>{{ character.name }}</td>
+            <td class='bodyText'>{{ character.title }}</td>
+            <td class='bodyText'>{{ character.location.name }}</td>
         </tr>
         {% endfor %}
 
