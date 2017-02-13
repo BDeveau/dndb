@@ -19,13 +19,11 @@ def user_login(request):
         # Return an 'invalid login' error message.
         redirect('/')
         
-@login_required
 def locations(request):
     return render(request, 'locations.html', {
         'locations': Location.objects.all()
     })
 
-@login_required
 def characters(request):
     return render(request, 'characters.html', {
         'characters': Character.objects.all()
