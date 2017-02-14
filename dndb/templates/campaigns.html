@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading headerText">Campaigns</div>
+    <div class="panel-body bodyText">
+        <p>A listing of all Campaigns in the system.</p>
+    </div>
+
+    <table class='table datatable'>
+        <tr>
+            <th class='headerText'>Name</th>
+        </tr>
+
+        {% for campaign in campaigns %}
+        <tr>
+            <td class='bodyText'>{{ campaign.name }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+{% endblock %}

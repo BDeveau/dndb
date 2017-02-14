@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 
-from .models import Location, Character
+from .models import Location, Character, Campaign
 
 # Create your views here.
 def index(request):
@@ -18,6 +18,11 @@ def user_login(request):
     else:
         # Return an 'invalid login' error message.
         redirect('/')
+
+def campaigns(request):
+    return render(request, 'campaigns.html', {
+        'campaigns': Campaign.objects.all
+    })
 
 def locations(request, campaign_id):
     return render(request, 'locations.html', {
