@@ -18,13 +18,13 @@ def user_login(request):
     else:
         # Return an 'invalid login' error message.
         redirect('/')
-        
-def locations(request):
+
+def locations(request, campaign_id):
     return render(request, 'locations.html', {
-        'locations': Location.objects.all()
+        'locations': Location.objects.get(campaign=campaign_id)
     })
 
-def characters(request):
+def characters(request, campaign_id):
     return render(request, 'characters.html', {
-        'characters': Character.objects.all()
+        'characters': Character.objects.get(campaign=campaign_id)
     })

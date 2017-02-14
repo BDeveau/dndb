@@ -12,8 +12,8 @@ import dndb.views
 urlpatterns = [
     url(r'^$', dndb.views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^locations/', dndb.views.locations, name='locations'),
-    url(r'^characters/', dndb.views.characters, name='characters'),
-    url(r'^login/$', 'django.contrib.auth.views.login'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout'),
+    url(r'^/campaign/?P<campign_id>[0-9]+/locations/', dndb.views.locations, name='locations'),
+    url(r'^/campaign/?P<campign_id>[0-9]+/characters/', dndb.views.characters, name='characters'),
+#     url(r'^login/$', 'django.contrib.auth.views.login'),
+#     url(r'^logout/$', 'django.contrib.auth.views.logout'),
 ]
