@@ -18,10 +18,10 @@
     <a class="navbar-brand headerText" href="/">DNDB</a>
     <ul class="nav navbar-nav">
       <li>
-        <a href="/campaign/1/characters"><span class="glyphicon glyphicon-user"></span> Characters</a>
+        <a href="{% url 'characters' 1 %}"><span class="glyphicon glyphicon-user"></span> Characters</a>
       </li>
       <li>
-        <a href="/campaign/1/locations"><span class="glyphicon glyphicon-map-marker"></span> Locations</a>
+        <a href="{% url 'locations' 1 %}"><span class="glyphicon glyphicon-map-marker"></span> Locations</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
