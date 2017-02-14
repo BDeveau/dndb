@@ -21,10 +21,10 @@ def user_login(request):
 
 def locations(request, campaign_id):
     return render(request, 'locations.html', {
-        'locations': Location.objects.get(campaign=campaign_id)
+        'locations': Location.objects.filter(campaign=campaign_id)
     })
 
 def characters(request, campaign_id):
     return render(request, 'characters.html', {
-        'characters': Character.objects.get(campaign=campaign_id)
+        'characters': Character.objects.filter(campaign=campaign_id)
     })
