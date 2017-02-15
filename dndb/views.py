@@ -8,16 +8,18 @@ from .models import Location, Character, Campaign
 def index(request):
     return render(request, 'index.html')
 
-def user_login(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        login(request, user)
-        redirect('/')
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            redirect('/')
+        else:
+            redirect('login')
     else:
-        # Return an 'invalid login' error message.
-        redirect('login')
+        return render(request, 'registration/login.html');
 
 def campaigns(request):
     return render(request, 'campaigns.html', {
