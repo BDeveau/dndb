@@ -5,20 +5,30 @@
 <div class="panel panel-default">
     <div class="panel-heading headerText">Campaigns</div>
     <div class="panel-body bodyText">
-        <p>A listing of all Campaigns in the system.</p>
+        <p>A list of campaigns you are a member of.</p>
     </div>
-
-    <table class='table datatable'>
-        <tr>
-            <th class='headerText'>Name</th>
-        </tr>
-
-        {% for campaign in campaigns %}
-        <tr>
-            <td class='bodyText'>{{ campaign.name }}</td>
-        </tr>
-        {% endfor %}
-
-    </table>
+    <div class="panel-body">
+        <table class='table table-striped datatable'>
+            <thead>
+                <tr>
+                    <th class='headerText'>Name</th>
+                    <th class='headerText'>Members</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for campaign in campaigns %}
+                    <tr>
+                        <td class='bodyText'>{{ campaign.name }}</td>
+                        <td class='bodyText'>
+                            {% for user in campaign.users.all %}
+                                {{ user.username }}{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
+

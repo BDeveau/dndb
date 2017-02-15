@@ -2,7 +2,7 @@
     font-family: 'Pangolin', cursive;
 }
 body {
-    background-color: #eee;
+    background-color: #ccc;
 }
 .headerText {
     /*font-family: 'Bahiana', cursive;*/
@@ -10,8 +10,8 @@ body {
     font-size: 20px;
     font-weight: normal;
 }
-.shadowed {
-    box-shadow: 5px 10px 20px #222;
+.shadowed, .panel {
+    box-shadow: 0px 5px 10px #222;
 }
 #logincontainer {
     text-align: center;

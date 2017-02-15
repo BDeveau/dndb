@@ -9,20 +9,23 @@
         or a city, or a village, or even just a store. Locations are generic and can be assigned as
         being a part of another Location. I might flesh this out later..</p>
     </div>
-
-    <table class='table datatable'>
-        <tr>
-            <th class='headerText'>Name</th>
-            <th class='headerText'>Part Of</th>
-        </tr>
-
-        {% for location in locations %}
-        <tr>
-            <td class='bodyText'>{{ location.name }}</td>
-            <td class='bodyText'>{{ location.parent }}</td>
-        </tr>
-        {% endfor %}
-
-    </table>
+    <div class="panel-body">
+        <table class='table table-striped datatable'>
+            <thead>
+                <tr>
+                    <th class='headerText'>Name</th>
+                    <th class='headerText'>Part Of</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for location in locations %}
+                    <tr>
+                        <td class='bodyText'>{{ location.name }}</td>
+                        <td class='bodyText'>{{ location.parent }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
