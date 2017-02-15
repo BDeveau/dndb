@@ -14,10 +14,10 @@ def user_login(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        # Redirect to a success page.
+        redirect('/')
     else:
         # Return an 'invalid login' error message.
-        redirect('/')
+        redirect('login')
 
 def campaigns(request):
     return render(request, 'campaigns.html', {

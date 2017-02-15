@@ -1,9 +1,20 @@
 .bodyText {
     font-family: 'Pangolin', cursive;
 }
+body {
+    background-color: #eee;
+}
 .headerText {
     /*font-family: 'Bahiana', cursive;*/
     font-family: 'Pangolin', cursive;
     font-size: 20px;
     font-weight: normal;
+}
+.shadowed {
+    box-shadow: 5px 10px 20px #222;
+}
+#logincontainer {
+    text-align: center;
+    background-color:#eee;
+    padding: 10px;
 }
