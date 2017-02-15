@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<div class="alert alert-warning" role="alert">Login error, please try again.</div>
 {% endif %}
 
 {% if next %}
@@ -21,7 +21,7 @@
                 </div>
                 <div class="panel-body">
                 
-                    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+                    <form method="post" action="{% url 'user_login' %}">
                         {% csrf_token %}
                         <div class="form-group">
                             <input type="text" class="form-control" id="username" placeholder="Username">
