@@ -18,5 +18,5 @@ urlpatterns = [
     url(r'^campaigns/', dndb.views.campaigns, name='campaigns'),
     url(r'^campaign/(?P<campaign_id>[0-9]+)/locations/', dndb.views.locations, name='locations'),
     url(r'^campaign/(?P<campaign_id>[0-9]+)/characters/', dndb.views.characters, name='characters'),
-    url(r'^selectcampaign/', dndb.views.selectcampaign, name='selectcampaign'),
+    url(r'^selectcampaign/(?P<campaign_id>[0-9]+)', dndb.views.selectcampaign, name='selectcampaign'),
 ]

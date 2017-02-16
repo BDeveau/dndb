@@ -16,12 +16,24 @@
 <nav class="navbar navbar-default navbar-static-top navbar-inverse">
   <div class="container-fluid">
     <a class="navbar-brand headerText" href="/"><span class="glyphicon glyphicon-book"></span> DnDB: Dungeons and Databases</a>
+    <ul class="nav navbar-nav">
+        <li>
+            {% if user.is_authenticated %}
+            <a href="{% url 'campaigns' %}"><span class="glyphicon glyphicon-globe"></span>
+                {% if request.session.campaign %}
+                    {{ request.session.campaign }}
+                {% else %}
+                    Campaigns
+                {% endif %}
+            </a>
+            {% endif %}
+        </li>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
     {% if user.is_authenticated %}
-    
       <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-cog"></span> User Menu <span class="caret"></span>
+              <span class="glyphicon glyphicon-cog"></span> {{ user.username|capfirst }} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
             <li><a href="/logout">Logout</a></li>
@@ -38,29 +50,31 @@
 </nav>
 <div class='container-fluid'>
     <div class='row'>
+        {% block sidebar %}
         <!-- Sidebar -->
-        {% if user.is_authenticated %}
         <div class='col-md-2'>
             <div class="panel panel-default">
                 <div class="panel-heading headerText">Menu</div>
                 <div class="panel-body bodyText">
-                    <ul class="nav nav-pills nav-stacked">
+                <ul class="nav nav-pills nav-stacked">
+                    {% if request.session.campaign %}
                         <li>
-                            <a href="{% url 'campaigns' %}"><span class="glyphicon glyphicon-globe"></span> Campaigns</a>
-                        </li>
-                          
-                        <li>
-                            <a href="{% url 'characters' 1 %}"><span class="glyphicon glyphicon-user"></span> Characters</a>
+                            <a href="{% url 'characters' request.session.campaign_id %}"><span class="glyphicon glyphicon-user"></span> Characters</a>
                         </li>
                         
                         <li>
-                            <a href="{% url 'locations' 1 %}"><span class="glyphicon glyphicon-map-marker"></span> Locations</a>
+                            <a href="{% url 'locations' request.session.campaign_id %}"><span class="glyphicon glyphicon-map-marker"></span> Locations</a>
                         </li>
+                    {% else %}
+                        <li>
+                            Select a Campaign from the top bar.
+                        </li>
+                    {% endif %}
                     </ul>
                 </div>
             </div>
         </div>
-        {% endif %}
+        {% endblock %}
         <!-- Content -->
         <div class='col-md-10'>
             {% block content %}{% endblock %}

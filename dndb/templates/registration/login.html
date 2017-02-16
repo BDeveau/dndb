@@ -1,26 +1,24 @@
 {% extends "base.html" %}
 
+{% block sidebar %}
+{% endblock %}
+
 {% block content %}
 
 {% if form.errors %}
 <div class="alert alert-warning" role="alert">Login error, please try again.</div>
 {% endif %}
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>You are already logged in.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-4 col-md-offset-5">
             <div class="panel panel-default shadowed">
                 <div class="panel-heading">
                     <h3 class="panel-title">DnDB Login</h3>
                 </div>
                 <div class="panel-body">
-                
+                    {% if next %}
+                        <div class="alert alert-warning" role="alert">You must login to see this page.</div>
+                    {% endif %}
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="form-group">

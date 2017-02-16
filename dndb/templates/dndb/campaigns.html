@@ -18,12 +18,12 @@
             <tbody>
                 {% for campaign in campaigns %}
                     <tr>
-                        <td class='bodyText'>{{ campaign.name }}</td>
-                        <td class='bodyText'>
-                            {% for user in campaign.users.all %}
-                                {{ user.username }}{% if not forloop.last %},{% endif %}
-                            {% endfor %}
-                        </td>
+                            <td class='bodyText'><a href="{% url 'selectcampaign' campaign.id %}">{{ campaign.name }}</a></td>
+                            <td class='bodyText'>
+                                {% for user in campaign.users.all %}
+                                    {{ user.username }}{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            </td>
                     </tr>
                 {% endfor %}
             </tbody>
