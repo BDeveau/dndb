@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 """ 
 TODO:
 Quests
+Party Loot
 
 """
 
@@ -45,3 +46,7 @@ class Task(models.Model):
     
     def __str__(self):
         return self.name
+    
+class PartyLoot(models.Model):
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+    notes = models.TextField(null=True, blank=True)
