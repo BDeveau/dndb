@@ -21,6 +21,8 @@ class Location(models.Model):
     notes = models.TextField(null=True, blank=True)
     parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.name
@@ -33,6 +35,8 @@ class Character(models.Model):
     notes = models.TextField(null=True, blank=True)
     location = models.ForeignKey(Location, null=True, blank=True, on_delete=models.CASCADE)
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.name
@@ -43,6 +47,8 @@ class Task(models.Model):
     location = models.ForeignKey(Location, null=True, blank=True, on_delete=models.CASCADE)
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     notes = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.name
