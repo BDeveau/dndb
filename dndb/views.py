@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-from .models import Location, Character, Campaign, Task
+from .models import Location, Character, Campaign, Task, PartyLoot
 
 # Create your views here.
 @login_required
@@ -20,7 +20,8 @@ def campaigns(request):
 def overview(request, campaign_id):
     return render(request, 'dndb/overview.html', {
         'recent_locations': Location.objects.filter(campaign=campaign_id)[:5],
-        'recent_characters': Character.objects.filter(campaign=campaign_id)[:5]
+        'recent_characters': Character.objects.filter(campaign=campaign_id)[:5],
+        'partyloot': PartyLoot.objects.get(campaign=campaign_id),
     })
 
 @login_required
