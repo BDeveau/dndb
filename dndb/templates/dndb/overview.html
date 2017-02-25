@@ -17,7 +17,7 @@
                     <tbody>
                         {% for character in recent_characters %}
                             <tr>
-                                <td class='bodyText'>{{ character.name }}</td>
+                                <td class='bodyText'><a href="{% url 'character' character.id %}">{{ character.name }}</a></td>
                                 <td class='bodyText'>{{ character.title }}</td>
                             </tr>
                         {% endfor %}
@@ -40,7 +40,7 @@
                     <tbody>
                         {% for location in recent_locations %}
                             <tr>
-                                <td class='bodyText'>{{ location.name }}</td>
+                                <td class='bodyText'><a href="{% url 'location' location.id %}">{{ location.name }}</a></td>
                                 <td class='bodyText'>{{ location.parent }}</td>
                             </tr>
                         {% endfor %}
@@ -63,7 +63,7 @@
                     <tbody>
                         {% for task in recent_tasks %}
                             <tr>
-                                <td class='bodyText'>{{ task.name }}</td>
+                                <td class='bodyText'><a href="{% url 'task' task.id %}">{{ task.name }}</a></td>
                                 <td class='bodyText'>{{ task.giver }}</td>
                             </tr>
                         {% endfor %}
