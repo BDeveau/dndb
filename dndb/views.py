@@ -22,6 +22,7 @@ def overview(request, campaign_id):
     return render(request, 'dndb/overview.html', {
         'recent_locations': Location.objects.filter(campaign=campaign_id)[:5],
         'recent_characters': Character.objects.filter(campaign=campaign_id)[:5],
+        'recent_tasks': Task.objects.filter(campaign=campaign_id)[:5],
         'partyloot': PartyLoot.objects.filter(campaign=campaign_id).first(),
     })
 
