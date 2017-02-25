@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from .models import Location, Character, Campaign, Task, PartyLoot
+from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm
 
 # Create your views here.
 @login_required
@@ -21,7 +22,7 @@ def overview(request, campaign_id):
     return render(request, 'dndb/overview.html', {
         'recent_locations': Location.objects.filter(campaign=campaign_id)[:5],
         'recent_characters': Character.objects.filter(campaign=campaign_id)[:5],
-        'partyloot': PartyLoot.objects.get(campaign=campaign_id),
+        'partyloot': PartyLoot.objects.filter(campaign=campaign_id).first(),
     })
 
 @login_required
@@ -40,6 +41,121 @@ def tasks(request, campaign_id):
 def characters(request, campaign_id):
     return render(request, 'dndb/characters.html', {
         'characters': Character.objects.filter(campaign=campaign_id)
+    })
+
+@login_required
+def character_detail(request, character_id):
+    
+    character = Character.objects.get(id=character_id)
+    form = CharacterForm(instance=character)
+    form.fields['location'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
+
+    if request.method == "POST":
+        if form.is_valid():
+            post = form.save(commit=False)
+            #more stuff if needed
+            post.save()
+            return redirect('character', character_id=character.id)
+            
+    return render(request, 'dndb/character_detail.html', {
+        'form': form,
+        'character': Character.objects.get(id=character_id)
+    })
+    
+@login_required
+def character_create(request):
+    
+    form = CharacterForm()
+    form.fields['location'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
+    
+    if request.method == "POST":
+        form = CharacterForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.campaign = Campaign.objects.get(id=request.session['campaign_id'])
+            post.save()
+            return redirect('character', character_id=post.id)
+            
+    return render(request, 'dndb/character_detail.html', {
+        'form': form
+    })
+
+@login_required
+def location_detail(request, location_id):
+    
+    location = Location.objects.get(id=location_id)
+    form = LocationForm(instance=location)
+    form.fields['parent'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
+    
+    if request.method == "POST":
+        form = LocationForm(request.POST, instance=location)
+        if form.is_valid():
+            post = form.save(commit=False)
+            #more stuff if needed
+            post.save()
+            return redirect('location', location_id=location.id)
+            
+    return render(request, 'dndb/location_detail.html', {
+        'form': form,
+        'location': Location.objects.get(id=location_id)
+    })
+    
+@login_required
+def location_create(request):
+    
+    form = LocationForm()
+    form.fields['parent'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
+    
+    if request.method == "POST":
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.campaign = Campaign.objects.get(id=request.session['campaign_id'])
+            post.save()
+            return redirect('location', location_id=post.id)
+            
+    return render(request, 'dndb/location_detail.html', {
+        'form': form
+    })
+    
+@login_required
+def task_detail(request, task_id):
+    
+    task = Task.objects.get(id=task_id)
+    form = TaskForm(instance=task)
+    form.fields['giver'].queryset = Character.objects.filter(campaign=request.session['campaign_id'])
+    form.fields['location'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
+    
+    if request.method == "POST":
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            post = form.save(commit=False)
+            #more stuff if needed
+            post.save()
+            return redirect('task', task_id=task.id)
+            
+    return render(request, 'dndb/task_detail.html', {
+        'form': form,
+        'task': Task.objects.get(id=task_id)
+    })
+    
+@login_required
+def task_create(request):
+    
+    form = TaskForm()
+    form.fields['giver'].queryset = Character.objects.filter(campaign=request.session['campaign_id'])
+    form.fields['location'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
+    
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.campaign = Campaign.objects.get(id=request.session['campaign_id'])
+            post.save()
+            return redirect('task', task_id=post.id)
+            
+    return render(request, 'dndb/task_detail.html', {
+        'form': form
     })
     
 @login_required
