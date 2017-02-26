@@ -73,6 +73,10 @@
                         <li>
                             <a href="{% url 'tasks' request.session.campaign_id %}"><span class="glyphicon glyphicon-hourglass"></span> Tasks</a>
                         </li>
+                        
+                        <li>
+                            <a href="{% url 'partyloot' request.session.campaign_id %}"><span class="glyphicon glyphicon-shopping-cart"></span> Party Loot</a>
+                        </li>
                     {% else %}
                         <li>
                             Select a Campaign from the top bar.

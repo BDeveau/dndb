@@ -20,9 +20,9 @@ def campaigns(request):
 @login_required
 def overview(request, campaign_id):
     return render(request, 'dndb/overview.html', {
-        'recent_locations': Location.objects.filter(campaign=campaign_id)[:5],
-        'recent_characters': Character.objects.filter(campaign=campaign_id)[:5],
-        'recent_tasks': Task.objects.filter(campaign=campaign_id)[:5],
+        'recent_locations': Location.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
+        'recent_characters': Character.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
+        'recent_tasks': Task.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'partyloot': PartyLoot.objects.filter(campaign=campaign_id).first(),
     })
 
@@ -60,7 +60,7 @@ def character_detail(request, character_id):
             
     return render(request, 'dndb/character_detail.html', {
         'form': form,
-        'character': Character.objects.get(id=character_id)
+        'character': character
     })
     
 @login_required
@@ -98,7 +98,7 @@ def location_detail(request, location_id):
             
     return render(request, 'dndb/location_detail.html', {
         'form': form,
-        'location': Location.objects.get(id=location_id)
+        'location': location
     })
     
 @login_required
@@ -137,7 +137,7 @@ def task_detail(request, task_id):
             
     return render(request, 'dndb/task_detail.html', {
         'form': form,
-        'task': Task.objects.get(id=task_id)
+        'task': task
     })
     
 @login_required
@@ -157,6 +157,25 @@ def task_create(request):
             
     return render(request, 'dndb/task_detail.html', {
         'form': form
+    })
+    
+@login_required
+def partyloot_detail(request, campaign_id):
+    
+    loot = PartyLoot.objects.get(campaign=campaign_id)
+    form = PartyLootForm(instance=loot)
+    
+    if request.method == "POST":
+        form = PartyLootForm(request.POST, instance=loot)
+        if form.is_valid():
+            post = form.save(commit=False)
+            #more stuff if needed
+            post.save()
+            return redirect('partyloot', campaign_id)
+            
+    return render(request, 'dndb/partyloot_detail.html', {
+        'form': form,
+        'campaign': Campaign.objects.get(id=campaign_id)
     })
     
 @login_required

@@ -22,6 +22,8 @@ urlpatterns = [
     url(r'^campaign/(?P<campaign_id>[0-9]+)/$', dndb.views.overview, name='overview'),
     url(r'^selectcampaign/(?P<campaign_id>[0-9]+)', dndb.views.selectcampaign, name='selectcampaign'),
     
+    url(r'^campaign/(?P<campaign_id>[0-9]+)/partyloot/$', dndb.views.partyloot_detail, name='partyloot'),
+    
     
     url(r'^campaign/(?P<campaign_id>[0-9]+)/locations/$', dndb.views.locations, name='locations'),
     url(r'^location/(?P<location_id>[0-9]+)/$', dndb.views.location_detail, name='location'),
