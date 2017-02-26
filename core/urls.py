@@ -12,18 +12,21 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^$', dndb.views.index, name='index'),
-    url(r'^login/', auth_views.login, name='login'),
-    url(r'^logout/', auth_views.logout, {'next_page': 'login'}, name='logout'),
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
     
     
     
     url(r'^campaigns/$', dndb.views.campaigns, name='campaigns'),
     url(r'^campaign/(?P<campaign_id>[0-9]+)/$', dndb.views.overview, name='overview'),
-    url(r'^selectcampaign/(?P<campaign_id>[0-9]+)', dndb.views.selectcampaign, name='selectcampaign'),
+    url(r'^selectcampaign/(?P<campaign_id>[0-9]+)/$', dndb.views.selectcampaign, name='selectcampaign'),
     
     url(r'^campaign/(?P<campaign_id>[0-9]+)/partyloot/$', dndb.views.partyloot_detail, name='partyloot'),
     url(r'^partyloot/new$', dndb.views.partyloot_create, name='partyloot_create'),
+    
+    url(r'^profile/$', dndb.views.user_detail, name='profile'),
+    url(r'^profile/password/$', dndb.views.change_password, name='password'),
     
     
     url(r'^campaign/(?P<campaign_id>[0-9]+)/locations/$', dndb.views.locations, name='locations'),

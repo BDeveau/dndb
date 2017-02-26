@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading headerText">
+            {% if user %}
+                {{ user.username }}
+            {% endif %}
+        </div>
+        <div class="panel-body">
+            <form method="POST" class="post-form">{% csrf_token %}
+                <table>
+                    {{ form }}
+                </table>
+                <div>
+                <a class="btn btn-default" href="{% url 'password' %}" role="button">Change Password</a>
+                </div>
+                <button type="submit" class="save btn btn-default">Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -36,8 +36,11 @@
               <span class="glyphicon glyphicon-cog"></span> {{ user.username|capfirst }} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% if user.is_staff %}
             <li><a href="/admin">Admin</a></li>
+            {% endif %}
           </ul>
         </li>
     {% else %}
@@ -89,6 +92,11 @@
         {% endblock %}
         <!-- Content -->
         <div class='col-md-10'>
+        {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+                {% endfor %}
+        {% endif %}
             {% block content %}{% endblock %}
         </div>
     </div>
