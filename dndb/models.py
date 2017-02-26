@@ -56,3 +56,6 @@ class Task(models.Model):
 class PartyLoot(models.Model):
     campaign = models.ForeignKey(Campaign, related_name='partyloot', on_delete=models.CASCADE)
     notes = models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.campaign.name
