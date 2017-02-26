@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
@@ -162,7 +162,7 @@ def task_create(request):
 @login_required
 def partyloot_detail(request, campaign_id):
     
-    loot = PartyLoot.objects.get(campaign=campaign_id)
+    loot = PartyLoot.objects.filter(campaign=campaign_id).first()
     form = PartyLootForm(instance=loot)
     
     if request.method == "POST":
@@ -173,11 +173,31 @@ def partyloot_detail(request, campaign_id):
             post.save()
             return redirect('partyloot', campaign_id)
             
+    if not loot:
+        return redirect('partyloot_create')    
+         
     return render(request, 'dndb/partyloot_detail.html', {
         'form': form,
         'campaign': Campaign.objects.get(id=campaign_id)
     })
+
+@login_required
+def partyloot_create(request):
     
+    form = PartyLootForm()
+    
+    if request.method == "POST":
+        form = PartyLootForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.campaign = Campaign.objects.get(id=request.session['campaign_id'])
+            post.save()
+            return redirect('partyloot', campaign_id=post.campaign.id)
+            
+    return render(request, 'dndb/partyloot_detail.html', {
+        'form': form
+    })
+
 @login_required
 def selectcampaign(request, campaign_id):
     c = Campaign.objects.get(pk=campaign_id)
