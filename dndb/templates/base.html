@@ -60,30 +60,34 @@
                 <div class="panel-heading headerText">Menu</div>
                 <div class="panel-body bodyText">
                 <ul class="nav nav-pills nav-stacked">
-                    {% if request.session.campaign %}
-                        <li>
-                            <a href="{% url 'overview' request.session.campaign_id %}"><span class="glyphicon glyphicon-paperclip"></span> Overview</a>
-                        </li>
-                        
-                        <li>
-                            <a href="{% url 'characters' request.session.campaign_id %}"><span class="glyphicon glyphicon-user"></span> Characters</a>
-                        </li>
-                        
-                        <li>
-                            <a href="{% url 'locations' request.session.campaign_id %}"><span class="glyphicon glyphicon-map-marker"></span> Locations</a>
-                        </li>
-                        
-                        <li>
-                            <a href="{% url 'tasks' request.session.campaign_id %}"><span class="glyphicon glyphicon-hourglass"></span> Tasks</a>
-                        </li>
-                        
-                        <li>
-                            <a href="{% url 'partyloot' request.session.campaign_id %}"><span class="glyphicon glyphicon-shopping-cart"></span> Party Loot</a>
-                        </li>
+                    {% if not user.is_authenticated %}
+                        <li><a href="{% url 'login' %}">Please Login</a></li>
                     {% else %}
-                        <li>
-                            Select a Campaign from the top bar.
-                        </li>
+                        {% if request.session.campaign %}
+                            <li>
+                                <a href="{% url 'overview' request.session.campaign_id %}"><span class="glyphicon glyphicon-paperclip"></span> Overview</a>
+                            </li>
+                            
+                            <li>
+                                <a href="{% url 'characters' request.session.campaign_id %}"><span class="glyphicon glyphicon-user"></span> Characters</a>
+                            </li>
+                            
+                            <li>
+                                <a href="{% url 'locations' request.session.campaign_id %}"><span class="glyphicon glyphicon-map-marker"></span> Locations</a>
+                            </li>
+                            
+                            <li>
+                                <a href="{% url 'tasks' request.session.campaign_id %}"><span class="glyphicon glyphicon-hourglass"></span> Tasks</a>
+                            </li>
+                            
+                            <li>
+                                <a href="{% url 'partyloot' request.session.campaign_id %}"><span class="glyphicon glyphicon-shopping-cart"></span> Party Loot</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{% url 'campaigns' %}">Select Campaign</a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                     </ul>
                 </div>

@@ -9,7 +9,6 @@ from .models import Location, Character, Campaign, Task, PartyLoot
 from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm, UserForm
 
 # Create your views here.
-@login_required
 def index(request):
     return render(request, 'index.html', {
     })
