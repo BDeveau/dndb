@@ -32,6 +32,10 @@ urlpatterns = [
     url(r'^campaign/(?P<campaign_id>[0-9]+)/locations/$', dndb.views.locations, name='locations'),
     url(r'^location/(?P<location_id>[0-9]+)/$', dndb.views.location_detail, name='location'),
     url(r'^location/new/$', dndb.views.location_create, name='location_create'),
+    url(r'^location/(?P<location_id>[0-9]+)/character/new/$', dndb.views.character_create, name='location_character_create'),
+    url(r'^location/(?P<location_id>[0-9]+)/task/new/$', dndb.views.task_create, name='location_task_create'),
+    url(r'^location/(?P<parent_id>[0-9]+)/location/new/$', dndb.views.location_create, name='location_location_create'),
+
     
     url(r'^campaign/(?P<campaign_id>[0-9]+)/characters/$', dndb.views.characters, name='characters'),
     url(r'^character/(?P<character_id>[0-9]+)/$', dndb.views.character_detail, name='character'),

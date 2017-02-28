@@ -1,21 +1,95 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="panel panel-default">
-        <div class="panel-heading headerText">
-            {% if location %}
-                {{ location.name }}
-            {% else %}
-                New Location
-            {% endif %}
+    <div class='col-md-8'>
+        <div class="panel panel-default">
+            <div class="panel-heading headerText">
+                {% if location %}
+                    {{ location.name }}
+                {% else %}
+                    New Location
+                {% endif %}
+            </div>
+            <div class="panel-body">
+                <form method="POST" class="post-form">{% csrf_token %}
+                    <table>
+                        {{ form }}
+                    </table>
+                    <button type="submit" class="save btn btn-default">Save</button>
+                </form>
+            </div>
         </div>
-        <div class="panel-body">
-            <form method="POST" class="post-form">{% csrf_token %}
-                <table>
-                    {{ form }}
+    </div>
+    {% if characters %}
+    <div class='col-md-4'>
+        <div class="panel panel-default">
+            <div class="panel-heading headerText">
+                Location Characters
+                <span class="pull-right"><a href="{% url 'location_character_create' location.id %}"><button type="button" class="btn btn-success">New</button></a></span>
+            </div>
+                <table class='table table-striped datatable-simple'>
+                    <thead>
+                        <tr>
+                            <th class='headerText'>Name</th>
+                            <th class='headerText'>Title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for character in characters %}
+                            <tr>
+                                <td class='bodyText'><a href="{% url 'character' character.id %}">{{ character.name }}</a></td>
+                                <td class='bodyText'>{{ character.title }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
-                <button type="submit" class="save btn btn-default">Save</button>
-            </form>
         </div>
+        {% endif %}
+        {% if children %}
+        <div class="panel panel-default">
+            <div class="panel-heading headerText">
+                Locations Within
+                <span class="pull-right"><a href="{% url 'location_location_create' location.id %}"><button type="button" class="btn btn-success">New</button></a></span>
+            </div>
+                <table class='table table-striped datatable-simple'>
+                    <thead>
+                        <tr>
+                            <th class='headerText'>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for child in children %}
+                            <tr>
+                                <td class='bodyText'><a href="{% url 'location' child.id %}">{{ child.name }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        {% endif %}
+        {% if tasks %}
+        <div class="panel panel-default">
+            <div class="panel-heading headerText">
+                Location Tasks
+                <span class="pull-right"><a href="{% url 'location_task_create' location.id %}"><button type="button" class="btn btn-success">New</button></a></span>
+            </div>
+                <table class='table table-striped datatable-simple'>
+                    <thead>
+                        <tr>
+                            <th class='headerText'>Name</th>
+                            <th class='headerText'>From</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                            <tr>
+                                <td class='bodyText'><a href="{% url 'task' task.id %}">{{ task.name }}</a></td>
+                                <td class='bodyText'>{{ task.giver }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}

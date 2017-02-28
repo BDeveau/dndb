@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from .models import Location, Character, Campaign, Task, PartyLoot
 from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm, UserForm
+import sys
 
 # Create your views here.
 def index(request):
@@ -67,10 +68,13 @@ def character_detail(request, character_id):
     })
     
 @login_required
-def character_create(request):
+def character_create(request, location_id=None):
     
     form = CharacterForm()
     form.fields['location'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
+    
+    if location_id:
+        form.fields['location'].initial = location_id
     
     if request.method == "POST":
         form = CharacterForm(request.POST)
@@ -103,14 +107,20 @@ def location_detail(request, location_id):
             
     return render(request, 'dndb/location_detail.html', {
         'form': form,
-        'location': location
+        'location': location,
+        'characters': Character.objects.filter(location=location_id),
+        'tasks': Task.objects.filter(location=location_id),
+        'children': Location.objects.filter(parent=location_id),
     })
     
 @login_required
-def location_create(request):
+def location_create(request, parent_id=None):
     
     form = LocationForm()
     form.fields['parent'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
+    
+    if parent_id:
+        form.fields['parent'].intitial = parent_id
     
     if request.method == "POST":
         form = LocationForm(request.POST)
@@ -148,11 +158,14 @@ def task_detail(request, task_id):
     })
     
 @login_required
-def task_create(request):
+def task_create(request, location_id=None):
     
     form = TaskForm()
     form.fields['giver'].queryset = Character.objects.filter(campaign=request.session['campaign_id'])
     form.fields['location'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
+    
+    if location_id:
+        form.fields['location'].initial = location_id
     
     if request.method == "POST":
         form = TaskForm(request.POST)
