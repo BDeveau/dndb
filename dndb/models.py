@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
 from django.contrib.auth.models import User
+import sys
 
 """ 
 TODO:
@@ -27,12 +28,30 @@ class Location(models.Model):
     def __str__(self):
         return self.name
         
-    def get_all_children(self, include_self=True):
+    def get_all_children(self, include_self=False):
         r = []
         if include_self:
             r.append(self)
         for c in Location.objects.filter(parent=self):
             _r = c.get_all_children(include_self=True)
+            if 0 < len(_r):
+                r.extend(_r)
+        return r
+    
+    def get_all_children_characters(self):
+        r = []
+        r.extend(self.characters.all())
+        for c in Location.objects.filter(parent=self):
+            _r = c.get_all_children_characters()
+            if 0 < len(_r):
+                r.extend(_r)
+        return r
+    
+    def get_all_children_tasks(self):
+        r = []
+        r.extend(self.tasks.all())
+        for c in Location.objects.filter(parent=self):
+            _r = c.get_all_children_tasks()
             if 0 < len(_r):
                 r.extend(_r)
         return r

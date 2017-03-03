@@ -110,8 +110,8 @@ def location_detail(request, location_id):
     return render(request, 'dndb/location_detail.html', {
         'form': form,
         'location': location,
-        'characters': Character.objects.filter(location=location_id),
-        'tasks': Task.objects.filter(location=location_id),
+        'characters': location.get_all_children_characters(),
+        'tasks': location.get_all_children_tasks(),
         'children': location.get_all_children(),
     })
     
