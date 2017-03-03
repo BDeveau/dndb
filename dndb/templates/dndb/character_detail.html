@@ -1,23 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="panel panel-default">
-        <div class="panel-heading headerText">
-            {% if character %}
-                {{ character.name }}
-            {% else %}
-                New Character
-            {% endif %}
+    <div class='col-md-8'>
+        <div class="panel panel-default">
+            <div class="panel-heading headerText">
+                {% if character %}
+                    {{ character.name }}
+                {% else %}
+                    New Character
+                {% endif %}
+            </div>
+            <div class="panel-body">
+                <form method="POST" class="post-form">{% csrf_token %}
+                        {{ form.errors }}
+                        {{ form.non_field_errors }}
+                    <table>
+                        {{ form }}
+                    </table>
+                    <button type="submit" class="save btn btn-default">Save</button>
+                </form>
+            </div>
         </div>
-        <div class="panel-body">
-            <form method="POST" class="post-form">{% csrf_token %}
-                    {{ form.errors }}
-                    {{ form.non_field_errors }}
-                <table>
-                    {{ form }}
+    </div>
+    <div class='col-md-4'>
+        <div class="panel panel-default">
+            <div class="panel-heading headerText">
+                Character Tasks
+                <span class="pull-right"><a href="{% url 'character_task_create' character_id=character.id %}"><button type="button" class="btn btn-success">New</button></a></span>
+            </div>
+                <table class='table table-striped datatable-simple'>
+                    <thead>
+                        <tr>
+                            <th class='headerText'>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                            <tr>
+                                <td class='bodyText'><a href="{% url 'task' task.id %}">{{ task.name }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
-                <button type="submit" class="save btn btn-default">Save</button>
-            </form>
         </div>
     </div>
 {% endblock %}

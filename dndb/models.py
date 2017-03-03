@@ -26,6 +26,14 @@ class Location(models.Model):
     
     def __str__(self):
         return self.name
+        
+    def get_all_children(self):
+        children = []
+        for location in Location.objects.filter(parent=self):
+            _children = location.get_all_children()
+            if 0 < len(_children):
+                children.extend(_children)
+        return children
     
 class Character(models.Model):
     name = models.CharField(max_length=50)

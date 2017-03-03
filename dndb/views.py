@@ -62,20 +62,21 @@ def character_detail(request, character_id):
             post.save()
             messages.success(request, 'Character Updated.')
             return redirect('character', character_id=character.id)
-            
+
     return render(request, 'dndb/character_detail.html', {
         'form': form,
-        'character': character
+        'character': character,
+        'tasks': Task.objects.filter(giver=character_id),
     })
     
 @login_required
-def character_create(request, location_id=None):
+def character_create(request, **kwargs):
     
     form = CharacterForm()
     form.fields['location'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
     
-    if location_id:
-        form.fields['location'].initial = location_id
+    if 'location_id' in kwargs:
+        form.fields['location'].initial = kwargs['location_id']
     
     if request.method == "POST":
         form = CharacterForm(request.POST)
@@ -105,23 +106,23 @@ def location_detail(request, location_id):
             post.save()
             messages.success(request, 'Location Updated.')
             return redirect('location', location_id=location.id)
-            
+    
     return render(request, 'dndb/location_detail.html', {
         'form': form,
         'location': location,
         'characters': Character.objects.filter(location=location_id),
         'tasks': Task.objects.filter(location=location_id),
-        'children': Location.objects.filter(parent=location_id),
+        'children': location.get_all_children(),
     })
     
 @login_required
-def location_create(request, parent_id=None):
+def location_create(request, **kwargs):
     
     form = LocationForm()
     form.fields['parent'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
     
-    if parent_id:
-        form.fields['parent'].intitial = parent_id
+    if 'parent_id' in kwargs:
+        form.fields['parent'].initial = kwargs['parent_id']
     
     if request.method == "POST":
         form = LocationForm(request.POST)
@@ -130,8 +131,8 @@ def location_create(request, parent_id=None):
             post.campaign = Campaign.objects.get(id=request.session['campaign_id'])
             post.save()
             messages.success(request, 'New Location Created.')
-            return redirect('location', location_id=post.id)
-            
+            return redirect('location', location_id=post.id) 
+          
     return render(request, 'dndb/location_detail.html', {
         'form': form
     })
@@ -159,14 +160,17 @@ def task_detail(request, task_id):
     })
     
 @login_required
-def task_create(request, location_id=None):
+def task_create(request, **kwargs):
     
     form = TaskForm()
     form.fields['giver'].queryset = Character.objects.filter(campaign=request.session['campaign_id'])
     form.fields['location'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
     
-    if location_id:
-        form.fields['location'].initial = location_id
+    if 'location_id' in kwargs:
+        form.fields['location'].initial = kwargs['location_id']
+        
+    if 'character_id' in kwargs:
+        form.fields['giver'].initial = kwargs['character_id']
     
     if request.method == "POST":
         form = TaskForm(request.POST)

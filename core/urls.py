@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^campaign/(?P<campaign_id>[0-9]+)/characters/$', dndb.views.characters, name='characters'),
     url(r'^character/(?P<character_id>[0-9]+)/$', dndb.views.character_detail, name='character'),
     url(r'^character/new/$', dndb.views.character_create, name='character_create'),
+    url(r'^character/(?P<character_id>[0-9]+)/task/new/$', dndb.views.task_create, name='character_task_create'),
     
     url(r'^campaign/(?P<campaign_id>[0-9]+)/tasks/$', dndb.views.tasks, name='tasks'),
     url(r'^task/(?P<task_id>[0-9]+)/$', dndb.views.task_detail, name='task'),
