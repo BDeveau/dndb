@@ -12,6 +12,8 @@ import sys
 # Create your views here.
 def index(request):
     return render(request, 'index.html', {
+        'tasks': Task.objects.filter(campaign__name='Site',completed=False).order_by('modified'),
+        'completed': Task.objects.filter(campaign__name='Site',completed=True).order_by('-modified')[:10]
     })
     
 @login_required
