@@ -16,7 +16,7 @@ class LocationForm(ModelForm):
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ['name', 'giver', 'location', 'notes']
+        fields = ['name', 'giver', 'location', 'completed', 'notes']
         
 class PartyLootForm(ModelForm):
     class Meta:
