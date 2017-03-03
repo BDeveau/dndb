@@ -62,6 +62,8 @@ def character_detail(request, character_id):
             post.save()
             messages.success(request, 'Character Updated.')
             return redirect('character', character_id=character.id)
+        else:
+            messages.error(request, form.errors)
 
     return render(request, 'dndb/character_detail.html', {
         'form': form,
@@ -86,6 +88,8 @@ def character_create(request, **kwargs):
             post.save()
             messages.success(request, 'New Character Created.')
             return redirect('character', character_id=post.id)
+        else:
+            messages.error(request, form.errors)
             
     return render(request, 'dndb/character_detail.html', {
         'form': form
@@ -106,6 +110,8 @@ def location_detail(request, location_id):
             post.save()
             messages.success(request, 'Location Updated.')
             return redirect('location', location_id=location.id)
+        else:
+            messages.error(request, form.errors)
     
     return render(request, 'dndb/location_detail.html', {
         'form': form,
@@ -131,7 +137,9 @@ def location_create(request, **kwargs):
             post.campaign = Campaign.objects.get(id=request.session['campaign_id'])
             post.save()
             messages.success(request, 'New Location Created.')
-            return redirect('location', location_id=post.id) 
+            return redirect('location', location_id=post.id)
+        else:
+            messages.error(request, form.errors)
           
     return render(request, 'dndb/location_detail.html', {
         'form': form
@@ -153,6 +161,8 @@ def task_detail(request, task_id):
             post.save()
             messages.success(request, 'Task Updated.')
             return redirect('task', task_id=task.id)
+        else:
+            messages.error(request, form.errors)
             
     return render(request, 'dndb/task_detail.html', {
         'form': form,
@@ -180,6 +190,8 @@ def task_create(request, **kwargs):
             post.save()
             messages.success(request, 'New Task Created.')
             return redirect('task', task_id=post.id)
+        else:
+            messages.error(request, form.errors)
             
     return render(request, 'dndb/task_detail.html', {
         'form': form
@@ -199,6 +211,8 @@ def partyloot_detail(request, campaign_id):
             post.save()
             messages.success(request, 'Partyloot Updated.')
             return redirect('partyloot', campaign_id)
+        else:
+            messages.error(request, form.errors)
             
     if not loot:
         return redirect('partyloot_create')    
@@ -221,6 +235,8 @@ def partyloot_create(request):
             post.save()
             messages.success(request, 'Partyloot Created.')
             return redirect('partyloot', campaign_id=post.campaign.id)
+        else:
+            messages.error(request, form.errors)
             
     return render(request, 'dndb/partyloot_detail.html', {
         'form': form
@@ -236,13 +252,37 @@ def user_detail(request):
         form = UserForm(request.POST, instance=user)
         if form.is_valid():
             user = form.save()
-            messages.success(request, 'Profile Updated.')
+            messages.success(request, 'User Registered.')
             return redirect('profile')
+        else:
+            messages.error(request, form.errors)
+            messages.error(request, form.non_field_errors)
          
     return render(request, 'dndb/user_detail.html', {
         'form': form
     })
 
+def user_registration(request):
+    
+    form = UserForm()
+    
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            update_session_auth_hash(request, user)
+            user.set_password(form.fields['password'])
+            user.save()
+            messages.success(request, 'Profile Updated.')
+            return redirect('profile')
+        else:
+            messages.error(request, form.errors)
+         
+    return render(request, 'dndb/user_detail.html', {
+        'form': form
+    })
+
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)

@@ -6,6 +6,9 @@ admin.autodiscover()
 import dndb.views
 from django.contrib.auth import views as auth_views
 
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
+
 # Examples:
 # url(r'^$', 'core.views.home', name='home'),
 # url(r'^blog/', include('blog.urls')),
@@ -17,6 +20,14 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     
     
+    url(r'^register/$',
+        CreateView.as_view(
+            template_name='dndb/user_register.html',
+            form_class=UserCreationForm,
+            success_url='/login'
+        ),
+        name='register'
+    ),
     
     url(r'^campaigns/$', dndb.views.campaigns, name='campaigns'),
     url(r'^campaign/(?P<campaign_id>[0-9]+)/$', dndb.views.overview, name='overview'),
