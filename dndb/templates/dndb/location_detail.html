@@ -12,6 +12,8 @@
             </div>
             <div class="panel-body">
                 <form method="POST" class="post-form">{% csrf_token %}
+                    {{ form.errors }}
+                    {{ form.non_field_errors }}
                     <table>
                         {{ form }}
                     </table>

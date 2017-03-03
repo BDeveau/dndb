@@ -55,6 +55,7 @@ def character_detail(request, character_id):
     form.fields['location'].queryset = Location.objects.filter(campaign=request.session['campaign_id'])
 
     if request.method == "POST":
+        form = CharacterForm(request.POST, instance=character)
         if form.is_valid():
             post = form.save(commit=False)
             #more stuff if needed
