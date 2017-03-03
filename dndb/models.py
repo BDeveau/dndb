@@ -31,7 +31,7 @@ class Location(models.Model):
         r = []
         if include_self:
             r.append(self)
-        for c in Person.objects.filter(parent=self):
+        for c in Location.objects.filter(parent=self):
             _r = c.get_all_children(include_self=True)
             if 0 < len(_r):
                 r.extend(_r)
