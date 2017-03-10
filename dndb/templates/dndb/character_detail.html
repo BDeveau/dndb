@@ -20,11 +20,14 @@
             </div>
         </div>
     </div>
+    {% if character %}
     <div class='col-md-4'>
         <div class="panel panel-default">
             <div class="panel-heading headerText">
                 Character Tasks
-                <span class="pull-right"><a href="{% url 'character_task_create' character_id=character.id %}"><button type="button" class="btn btn-success">New</button></a></span>
+                
+                <span class="pull-right"><a href="{% url 'character_task_create' character_id=character.id %}"><button type="button" class="btn btn-success">New</button></a></span>    
+                
             </div>
                 <table class='table table-striped datatable-simple'>
                     <thead>
@@ -42,4 +45,5 @@
                 </table>
         </div>
     </div>
+    {% endif %}
 {% endblock %}
