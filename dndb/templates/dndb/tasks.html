@@ -22,7 +22,7 @@
             <tbody>
                 {% for task in tasks %}
                     <tr>
-                        <td class='bodyText'><a href="{% url 'task' task.id %}">{{ task.name }}</a></td>
+                        <td class='bodyText'><a {% if task.completed %} style="text-decoration: line-through;" {% endif %} href="{% url 'task' task.id %}">{{ task.name }}</a></td>
                         <td class='bodyText'>
                             {% if task.giver %}
                                 <a href="{% url 'character' task.giver.id %}">{{ task.giver.name }}
