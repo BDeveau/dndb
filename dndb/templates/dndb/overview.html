@@ -41,7 +41,7 @@
                         {% for location in recent_locations %}
                             <tr>
                                 <td class='bodyText'><a href="{% url 'location' location.id %}">{{ location.name }}</a></td>
-                                <td class='bodyText'>{{ location.parent }}</td>
+                                <td class='bodyText'>{% if location.parent %}{{ location.parent }}{% endif %}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
