@@ -22,13 +22,12 @@ $(document).ready(function(){
           'lengthMenu': '_MENU_'
         },
         dom: 
-        "<'row'<'col-sm-6'f>>" +
+        "<'row'<'col-sm-12'f>>" +
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-6'l><'col-sm-6'p>>",
     });
     
     $('.datatable-simple .dataTables_filter label').css('float','left');
     $('.dataTables_filter > label input').attr('placeholder','Filter');
-    $('.dataTables_filter').css('text-align','left');
     
 });
