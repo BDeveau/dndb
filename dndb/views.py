@@ -2,12 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.core.urlresolvers import reverse_lazy
+from django import forms
 from .models import Location, Character, Campaign, Task, PartyLoot
 from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm, UserForm
 import sys
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 def index(request):
@@ -264,25 +267,20 @@ def user_detail(request):
         'form': form
     })
 
-def user_registration(request):
+class register_user(CreateView):
+    model = User
+    form_class = UserCreationForm
     
-    form = UserForm()
-    
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            update_session_auth_hash(request, user)
-            user.set_password(form.fields['password'])
-            user.save()
-            messages.success(request, 'Profile Updated.')
-            return redirect('profile')
-        else:
-            messages.error(request, form.errors)
-         
-    return render(request, 'dndb/user_detail.html', {
-        'form': form
-    })
+    def form_valid(self, form):
+        #save the new user first
+        form.save()
+        #get the username and password
+        username = self.request.POST['username']
+        password = self.request.POST['password1']
+        #authenticate user then login
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
+        return redirect('profile')
 
 @login_required
 def change_password(request):

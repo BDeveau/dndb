@@ -13,11 +13,10 @@
                     {{ form }}
                 </table>
                 
-                {% if request.session.user %}
+
                 <div>
                 <a class="btn btn-default" href="{% url 'password' %}" role="button">Change Password</a>
                 </div>
-                {% endif %}
                 
                 <button type="submit" class="save btn btn-default">Save</button>
             </form>
