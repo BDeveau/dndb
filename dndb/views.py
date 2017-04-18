@@ -28,6 +28,7 @@ def campaigns(request):
 @login_required
 def overview(request, campaign_id):
     return render(request, 'dndb/overview.html', {
+        'campaign': Campaign.objects.get(id=campaign_id),
         'recent_locations': Location.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'recent_characters': Character.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'recent_tasks': Task.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
@@ -306,3 +307,12 @@ def selectcampaign(request, campaign_id):
     request.session['campaign'] = c.name
     request.session['campaign_id'] = c.id
     return redirect("/campaign/" + str(c.id))
+
+@login_required
+def join_campaign(request):
+    return redirect("overview")
+
+@login_required
+def create_join_link(request, campaign_id):
+    c = Campaign.objects.get(pk=campaign_id)
+    return redirect("overview")

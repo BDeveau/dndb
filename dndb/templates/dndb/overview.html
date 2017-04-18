@@ -72,6 +72,8 @@
             </div>
         </div>
     </div>
+</div>
+<div class="row">
     <div class='col-md-4'>
         <div class="panel panel-default">
             <div class="panel-heading headerText">Party Loot
@@ -81,6 +83,18 @@
             </div>
             <div class="panel-body">
                 <pre>{{ partyloot.notes  }}</pre>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-4'>
+        <div class="panel panel-default">
+            <div class="panel-heading headerText">Members<span class="pull-right"><a href="#" onclick="alert('Coming Soon.. Ask Brad to do it.')"><button type="button" class="btn btn-success">Invite</button></a></span></div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    {% for user in campaign.users.all %}
+                        {{ user.username }}{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
