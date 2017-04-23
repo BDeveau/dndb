@@ -13,6 +13,7 @@ Party Loot
 class Campaign(models.Model):
     name = models.CharField(max_length=50)
     users = models.ManyToManyField(User, related_name='campaigns')
+    owner = models.ForeignKey(User, related_name='owned_campaigns', on_delete=models.CASCADE)
     
     def __str__(self):
         return self.name
