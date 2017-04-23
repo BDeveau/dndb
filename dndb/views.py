@@ -24,7 +24,8 @@ def index(request):
     })
     
 class campaigns(LoginRequiredMixin, ListView):
-    model = Campaign
+    def get_queryset(self):
+        return Campaign.objects.filter(users=self.request.user)
 
 class campaign_invite(LoginRequiredMixin, UpdateView):
     model = Campaign
