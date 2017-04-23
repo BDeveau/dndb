@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django import forms
 from .models import Location, Character, Campaign, Task, PartyLoot
 from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm, UserForm
@@ -29,6 +29,9 @@ class campaigns(LoginRequiredMixin, ListView):
 class campaign_invite(LoginRequiredMixin, UpdateView):
     model = Campaign
     fields = ['users']
+
+    def get_success_url(self):
+        return reverse('overview', kwargs={'campaign_id': self.object.id})
 
 @login_required
 def overview(request, campaign_id):
