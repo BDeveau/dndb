@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for campaign in campaigns %}
+                {% for campaign in object_list %}
                     <tr>
                             <td class='bodyText'><a href="{% url 'selectcampaign' campaign.id %}">{{ campaign.name }}</a></td>
                             <td class='bodyText'>

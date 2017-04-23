@@ -30,4 +30,7 @@ $(document).ready(function(){
     $('.datatable-simple .dataTables_filter label').css('float','left');
     $('.dataTables_filter > label input').attr('placeholder','Filter');
     
+    $('#id_users').chosen({ width: '100%' });
+    $('select').chosen();
+    
 });

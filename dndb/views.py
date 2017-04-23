@@ -10,7 +10,11 @@ from django import forms
 from .models import Location, Character, Campaign, Task, PartyLoot
 from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm, UserForm
 import sys
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
+
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 # Create your views here.
 def index(request):
@@ -19,11 +23,12 @@ def index(request):
         'completed': Task.objects.filter(campaign__name='Site',completed=True).order_by('-modified')[:10]
     })
     
-@login_required
-def campaigns(request):
-    return render(request, 'dndb/campaigns.html', {
-        'campaigns': Campaign.objects.filter(users=request.user)
-    })
+class campaigns(LoginRequiredMixin, ListView):
+    model = Campaign
+
+class campaign_invite(LoginRequiredMixin, UpdateView):
+    model = Campaign
+    fields = ['users']
 
 @login_required
 def overview(request, campaign_id):

@@ -18,12 +18,10 @@ urlpatterns = [
     
     url(r'^register/$', dndb.views.register_user.as_view(), name='register'),
     
-    url(r'^campaigns/$', dndb.views.campaigns, name='campaigns'),
+    url(r'^campaigns/$', dndb.views.campaigns.as_view(), name='campaigns'),
     url(r'^campaign/(?P<campaign_id>[0-9]+)/$', dndb.views.overview, name='overview'),
+    url(r'^campaign/(?P<pk>[0-9]+)/invite/$', dndb.views.campaign_invite.as_view(), name='invite'),
     url(r'^selectcampaign/(?P<campaign_id>[0-9]+)/$', dndb.views.selectcampaign, name='selectcampaign'),
-
-    url(r'^joincampaign/(?P<hash>\w+)/$', dndb.views.join_campaign, name='joincampaign'),
-    url(r'^createjoinlink/(?P<campaign_id>[0-9]+)/$', dndb.views.create_join_link, name='createjoinlink'),
     
     url(r'^campaign/(?P<campaign_id>[0-9]+)/partyloot/$', dndb.views.partyloot_detail, name='partyloot'),
     url(r'^partyloot/new$', dndb.views.partyloot_create, name='partyloot_create'),
