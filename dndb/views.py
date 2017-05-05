@@ -20,8 +20,13 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 # Create your views here.
 def index(request):
     return render(request, 'index.html', {
-        'tasks': Task.objects.filter(campaign__name='Site', completed=False).order_by('modified'),
-        'completed': Task.objects.filter(campaign__name='Site', completed=True).order_by('-modified')[:10]
+        'tasks': [
+            {'name': "Items for PartyLoot"},
+            {'name': "REST Framework and New UI"}
+        ],
+        'completed': [
+            {'name': "Items model"}
+        ]
     })
 
 
