@@ -7,7 +7,8 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.core.urlresolvers import reverse_lazy, reverse
 from django import forms
-from .models import Location, Character, Campaign, Task, PartyLoot
+from django.forms import inlineformset_factory
+from .models import Location, Character, Campaign, Task, PartyLoot, Item
 from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm, UserForm
 import sys
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -245,9 +246,7 @@ def partyloot_detail(request, campaign_id):
     if request.method == "POST":
         form = PartyLootForm(request.POST, instance=loot)
         if form.is_valid():
-            post = form.save(commit=False)
-            # more stuff if needed
-            post.save()
+            post = form.save()
             messages.success(request, 'Partyloot Updated.')
             return redirect('partyloot', campaign_id)
         else:
