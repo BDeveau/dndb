@@ -94,6 +94,11 @@ class Item(models.Model):
     name = models.CharField(max_length=50)
     quantity = models.IntegerField(null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
+    campaign = models.ForeignKey(
+        Campaign, related_name='items', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class PartyLoot(models.Model):
