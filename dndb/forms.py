@@ -32,13 +32,6 @@ class ItemForm(ModelForm):
         fields = ['name', 'quantity', 'notes']
 
 
-class PartyLootForm(ModelForm):
-
-    class Meta:
-        model = PartyLoot
-        fields = ['items', 'notes']
-
-
 class UserForm(ModelForm):
 
     class Meta:

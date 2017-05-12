@@ -22,11 +22,12 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 def index(request):
     return render(request, 'index.html', {
         'tasks': [
-            {'name': "Items for PartyLoot"},
+            {'name': "delete records"},
             {'name': "REST Framework and New UI"}
         ],
         'completed': [
-            {'name': "Items model"}
+            {'name': "Items model"},
+            {'name': "Items for PartyLoot"},
         ]
     })
 
@@ -258,7 +259,7 @@ def item_detail(request, item_id):
             # more stuff if needed
             post.save()
             messages.success(request, 'Item Updated.')
-            return redirect('item', item_id=item.id)
+            return redirect('item_detail', item_id=item.id)
         else:
             messages.error(request, form.errors)
 
@@ -280,55 +281,11 @@ def item_create(request, **kwargs):
                 id=request.session['campaign_id'])
             post.save()
             messages.success(request, 'New Item Created.')
-            return redirect('task', item_id=post.id)
+            return redirect('item_detail', item_id=post.id)
         else:
             messages.error(request, form.errors)
 
     return render(request, 'dndb/item_detail.html', {
-        'form': form
-    })
-
-
-@login_required
-def partyloot_detail(request, campaign_id):
-    loot = PartyLoot.objects.filter(campaign=campaign_id).first()
-    form = PartyLootForm(instance=loot)
-
-    if request.method == "POST":
-        form = PartyLootForm(request.POST, instance=loot)
-        if form.is_valid():
-            post = form.save()
-            messages.success(request, 'Partyloot Updated.')
-            return redirect('partyloot', campaign_id)
-        else:
-            messages.error(request, form.errors)
-
-    if not loot:
-        return redirect('partyloot_create')
-
-    return render(request, 'dndb/partyloot_detail.html', {
-        'form': form,
-        'campaign': Campaign.objects.get(id=campaign_id)
-    })
-
-
-@login_required
-def partyloot_create(request):
-    form = PartyLootForm()
-
-    if request.method == "POST":
-        form = PartyLootForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.campaign = Campaign.objects.get(
-                id=request.session['campaign_id'])
-            post.save()
-            messages.success(request, 'Partyloot Created.')
-            return redirect('partyloot', campaign_id=post.campaign.id)
-        else:
-            messages.error(request, form.errors)
-
-    return render(request, 'dndb/partyloot_detail.html', {
         'form': form
     })
 

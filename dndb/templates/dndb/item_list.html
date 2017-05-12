@@ -12,12 +12,14 @@
             <thead>
                 <tr>
                     <th class='headerText'>Name</th>
+                    <th class='headerText'>Quantity</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in object_list %}
+                {% for item in items %}
                     <tr>
                             <td class='bodyText'><a href="{% url 'item_detail' item.id %}">{{ item.name }}</a></td>
+                            <td class='bodyText'>{{ item.quantity }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

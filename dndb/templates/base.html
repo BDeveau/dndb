@@ -85,10 +85,6 @@
                             <li>
                                 <a href="{% url 'items' request.session.campaign_id %}"><span class="glyphicon glyphicon-shopping-cart"></span> Items</a>
                             </li>
-                            
-                            <li>
-                                <a href="{% url 'partyloot' request.session.campaign_id %}"><span class="glyphicon glyphicon-shopping-cart"></span> Party Loot</a>
-                            </li>
                         {% else %}
                             <li>
                                 <a href="{% url 'campaigns' %}">Select Campaign</a>

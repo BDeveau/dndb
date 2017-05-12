@@ -23,9 +23,6 @@ urlpatterns = [
     url(r'^campaign/(?P<pk>[0-9]+)/invite/$', dndb.views.campaign_invite.as_view(), name='invite'),
     url(r'^selectcampaign/(?P<campaign_id>[0-9]+)/$', dndb.views.selectcampaign, name='selectcampaign'),
     
-    url(r'^campaign/(?P<campaign_id>[0-9]+)/partyloot/$', dndb.views.partyloot_detail, name='partyloot'),
-    url(r'^partyloot/new$', dndb.views.partyloot_create, name='partyloot_create'),
-    
     url(r'^profile/$', dndb.views.user_detail, name='profile'),
     url(r'^profile/password/$', dndb.views.change_password, name='password'),
     
@@ -48,7 +45,7 @@ urlpatterns = [
     url(r'^task/new/$', dndb.views.task_create, name='task_create'),
 
     url(r'^campaign/(?P<campaign_id>[0-9]+)/items/$', dndb.views.items, name='items'),
-    url(r'^item/(?P<item_id>[0-9]+)/$', dndb.views.item_detail, name='item'),
+    url(r'^item/(?P<item_id>[0-9]+)/$', dndb.views.item_detail, name='item_detail'),
     url(r'^item/new/$', dndb.views.item_create, name='item_create'),
     
 ]
