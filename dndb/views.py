@@ -54,7 +54,6 @@ def overview(request, campaign_id):
         'recent_characters': Character.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'recent_tasks': Task.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'recent_items': Item.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
-        'partyloot': PartyLoot.objects.filter(campaign=campaign_id).first(),
     })
 
 
