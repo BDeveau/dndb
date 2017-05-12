@@ -8,8 +8,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.core.urlresolvers import reverse_lazy, reverse
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Location, Character, Campaign, Task, PartyLoot, Item
-from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm, UserForm, ItemForm
+from .models import Location, Character, Campaign, Task, Item
+from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm
 import sys
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
