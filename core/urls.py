@@ -46,5 +46,9 @@ urlpatterns = [
     url(r'^campaign/(?P<campaign_id>[0-9]+)/tasks/$', dndb.views.tasks, name='tasks'),
     url(r'^task/(?P<task_id>[0-9]+)/$', dndb.views.task_detail, name='task'),
     url(r'^task/new/$', dndb.views.task_create, name='task_create'),
+
+    url(r'^campaign/(?P<campaign_id>[0-9]+)/items/$', dndb.views.items, name='items'),
+    url(r'^item/(?P<item_id>[0-9]+)/$', dndb.views.item_detail, name='item'),
+    url(r'^item/new/$', dndb.views.item_create, name='item_create'),
     
 ]

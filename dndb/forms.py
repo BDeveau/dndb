@@ -25,6 +25,13 @@ class TaskForm(ModelForm):
         fields = ['name', 'giver', 'location', 'completed', 'notes']
 
 
+class ItemForm(ModelForm):
+
+    class Meta:
+        model = Item
+        fields = ['name', 'quantity', 'notes']
+
+
 class PartyLootForm(ModelForm):
 
     class Meta:

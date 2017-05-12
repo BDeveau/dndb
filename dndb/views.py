@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django import forms
 from django.forms import inlineformset_factory
 from .models import Location, Character, Campaign, Task, PartyLoot, Item
-from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm, UserForm
+from .forms import LocationForm, CharacterForm, TaskForm, PartyLootForm, UserForm, ItemForm
 import sys
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -52,6 +52,7 @@ def overview(request, campaign_id):
         'recent_locations': Location.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'recent_characters': Character.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'recent_tasks': Task.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
+        'recent_items': Item.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'partyloot': PartyLoot.objects.filter(campaign=campaign_id).first(),
     })
 
@@ -67,6 +68,13 @@ def locations(request, campaign_id):
 def tasks(request, campaign_id):
     return render(request, 'dndb/tasks.html', {
         'tasks': Task.objects.filter(campaign=campaign_id)
+    })
+
+
+@login_required
+def items(request, campaign_id):
+    return render(request, 'dndb/item_list.html', {
+        'items': Item.objects.filter(campaign=campaign_id)
     })
 
 
@@ -234,6 +242,49 @@ def task_create(request, **kwargs):
             messages.error(request, form.errors)
 
     return render(request, 'dndb/task_detail.html', {
+        'form': form
+    })
+
+
+@login_required
+def item_detail(request, item_id):
+    item = Item.objects.get(id=item_id)
+    form = ItemForm(instance=item)
+
+    if request.method == "POST":
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            post = form.save(commit=False)
+            # more stuff if needed
+            post.save()
+            messages.success(request, 'Item Updated.')
+            return redirect('item', item_id=item.id)
+        else:
+            messages.error(request, form.errors)
+
+    return render(request, 'dndb/item_detail.html', {
+        'form': form,
+        'item': item
+    })
+
+
+@login_required
+def item_create(request, **kwargs):
+    form = ItemForm()
+
+    if request.method == "POST":
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.campaign = Campaign.objects.get(
+                id=request.session['campaign_id'])
+            post.save()
+            messages.success(request, 'New Item Created.')
+            return redirect('task', item_id=post.id)
+        else:
+            messages.error(request, form.errors)
+
+    return render(request, 'dndb/item_detail.html', {
         'form': form
     })
 

@@ -96,6 +96,8 @@ class Item(models.Model):
     notes = models.TextField(null=True, blank=True)
     campaign = models.ForeignKey(
         Campaign, related_name='items', on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
