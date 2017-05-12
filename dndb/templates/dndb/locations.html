@@ -17,6 +17,7 @@
             <thead>
                 <tr>
                     <th class='headerText'>Name</th>
+                    <th class='headerText'>Type</th>
                     <th class='headerText'>Part Of</th>
                 </tr>
             </thead>
@@ -24,6 +25,9 @@
                 {% for location in locations %}
                     <tr>
                         <td class='bodyText'><a href="{% url 'location' location.id %}">{{ location.name }}</a></td>
+                        <td class='bodyText'>
+                            {% if location.location_type %}{{ location.location_type }}{% endif %}
+                        </td>
                         <td class='bodyText'>
                             {% if location.parent %}
                                 <a href="{% url 'location' location.parent.id %}">{{ location.parent }}</a>

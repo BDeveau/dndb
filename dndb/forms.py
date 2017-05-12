@@ -15,7 +15,7 @@ class LocationForm(ModelForm):
 
     class Meta:
         model = Location
-        fields = ['name', 'parent', 'notes']
+        fields = ['name', 'location_type', 'parent', 'notes']
 
 
 class TaskForm(ModelForm):
