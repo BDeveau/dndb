@@ -30,6 +30,7 @@ class Location(models.Model):
         Campaign, related_name='locations', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    location_type = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
         return self.name
