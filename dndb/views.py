@@ -94,6 +94,10 @@ def character_detail(request, character_id):
 
     if request.method == "POST":
         form = CharacterForm(request.POST, instance=character)
+        if 'delete' in request.POST:
+            character.delete()
+            messages.warning(request, 'Character DELETED.')
+            return redirect('characters', campaign_id=request.session['campaign_id'])
         if form.is_valid():
             post = form.save(commit=False)
             # more stuff if needed
@@ -145,6 +149,10 @@ def location_detail(request, location_id):
 
     if request.method == "POST":
         form = LocationForm(request.POST, instance=location)
+        if 'delete' in request.POST:
+            location.delete()
+            messages.warning(request, 'Location DELETED.')
+            return redirect('locations', campaign_id=request.session['campaign_id'])
         if form.is_valid():
             post = form.save(commit=False)
             # more stuff if needed
@@ -200,6 +208,10 @@ def task_detail(request, task_id):
 
     if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
+        if 'delete' in request.POST:
+            task.delete()
+            messages.warning(request, 'Task DELETED.')
+            return redirect('tasks', campaign_id=request.session['campaign_id'])
         if form.is_valid():
             post = form.save(commit=False)
             # more stuff if needed
