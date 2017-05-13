@@ -253,6 +253,10 @@ def item_detail(request, item_id):
 
     if request.method == "POST":
         form = ItemForm(request.POST, instance=item)
+        if 'delete' in request.POST:
+            item.delete()
+            messages.warning(request, 'Item DELETED.')
+            return redirect('items', campaign_id=request.session['campaign_id'])
         if form.is_valid():
             post = form.save(commit=False)
             # more stuff if needed
