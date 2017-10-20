@@ -5,3 +5,14 @@ staticfiles
 db.sqlite3
 /.project
 /.pydevproject
+bin/
+dndb/include/
+dndb/lib/
+dndb/local/
+dndb/pip-selfcheck.json
+dndb/share/
+include/
+lib/
+pip-selfcheck.json
+local/
+share/
