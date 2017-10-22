@@ -22,12 +22,12 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 def index(request):
     return render(request, 'index.html', {
         'tasks': [
-            {'name': "delete records"},
-            {'name': "REST Framework and New UI"}
+            {'name': "Campaign Creation and Management"},
+            {'name': 'User Model Change'},
+            {'name': "REST Framework"}
         ],
         'completed': [
-            {'name': "Items model"},
-            {'name': "Items for PartyLoot"},
+            {'name': "New Style"}
         ]
     })
 

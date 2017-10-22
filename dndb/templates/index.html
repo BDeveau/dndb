@@ -3,29 +3,32 @@
 
 {% block content %}
     
-    <div class="jumbotron">
-      <h1 class="headerText">Welcome!</h1>
-      <p class="bodyText">Ulitmate goals of this site, allowing automatic user registration, users to 
-      create their own campaigns, characters, locations, etc.</p>
-    </div>
-    
-    <div class="panel panel-default">
-        <div class="panel-heading headerText">Recently Completed</div>
-            <ul class="list-group">
+    <h1>Welcome!</h1>
+    <p>the goal of this website is to offer a place where players of D&D and other tabletop games
+    can have an online database to input their notes so they are easily shared with the other players of the group.
+    Only the members of a campaign will be able to see the notes for it, and the creator of a campaign will be able
+    to invite others to join.</p>
+
+    <div class="row">
+
+        <div class="col">
+            <h3>Recent News</h3>
+            <ul class="">
             {% for c in completed %}
-                <li class="list-group-item">{{ c.name }}</li>
+                <li class="">{{ c.name }}</li>
             {% endfor %}
             </ul>
-    </div>
-    
-    <div class="panel panel-default">
-        <div class="panel-heading headerText">Next Up</div>
-            <ul class="list-group">
+        </div>
+        
+        <div class="col">
+            <h3>Next Up</h3>
+            <ul class="">
             {% for t in tasks %}
-                <li class="list-group-item">{{ t.name }}</li>
+                <li class="">{{ t.name }}</li>
             {% endfor %}
             </ul>
+        </div>
+
     </div>
-    
     
 {% endblock %}
