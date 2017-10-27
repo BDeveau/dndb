@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="row">
     <div class='col-md-8'>
         <div class="panel panel-default">
-            <div class="panel-heading headerText">
+            <h3>
                 {% if location %}
                     {{ location.name }}
                 {% else %}
                     New Location
                 {% endif %}
-            </div>
+            </h3>
             <div class="panel-body">
                 <form method="POST" class="post-form">{% csrf_token %}
                     <table>
@@ -24,10 +25,10 @@
     <div class='col-md-4'>
         {% if location %}
         <div class="panel panel-default">
-            <div class="panel-heading headerText">
+            <h3>
                 Location Characters
                 <span class="pull-right"><a href="{% url 'location_character_create' location.id %}"><button type="button" class="btn btn-success">New</button></a></span>
-            </div>
+            </h3>
                 <table class='table table-striped datatable-simple'>
                     <thead>
                         <tr>
@@ -46,10 +47,10 @@
                 </table>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading headerText">
+            <h3>
                 Locations Within
                 <span class="pull-right"><a href="{% url 'location_location_create' location.id %}"><button type="button" class="btn btn-success">New</button></a></span>
-            </div>
+            </h3>
                 <table class='table table-striped datatable-simple'>
                     <thead>
                         <tr>
@@ -66,10 +67,10 @@
                 </table>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading headerText">
+            <h3>
                 Location Tasks
                 <span class="pull-right"><a href="{% url 'location_task_create' location.id %}"><button type="button" class="btn btn-success">New</button></a></span>
-            </div>
+            </h3>
                 <table class='table table-striped datatable-simple'>
                     <thead>
                         <tr>
@@ -89,4 +90,5 @@
         </div>
         {% endif %}
     </div>
+</div>
 {% endblock %}

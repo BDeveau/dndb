@@ -2,6 +2,9 @@ body {
     background-color: #ccc;
     margin-top: 7em;
 }
+a, a:hover {
+	color: #58180D;
+}
 .shadowed {
     box-shadow: 0px 2px 5px #333;
 }
@@ -9,13 +12,6 @@ body {
     text-align: center;
     background-color:#eee;
     padding: 10px;
-}
-.headertext {
-    margin-top: .2em;
-    margin-bottom: .2em;
-    font-family: MrJeeves;
-    font-weight: 800;
-    color: #58180D
 }
 .panel-heading {
     font-size: .529cm;

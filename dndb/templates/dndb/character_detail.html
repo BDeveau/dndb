@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class='col-md-8'>
+<div class='row'>
+    <div class='col-md-7'>
         <div class="panel panel-default">
-            <div class="panel-heading headerText">
+            <h3>
                 {% if character %}
                     {{ character.name }}
                 {% else %}
                     New Character
                 {% endif %}
-            </div>
+            </h3>
             <div class="panel-body">
                 <form method="POST" class="post-form">{% csrf_token %}
                     <table>
@@ -22,14 +23,14 @@
         </div>
     </div>
     {% if character %}
-    <div class='col-md-4'>
+    <div class='col-md-5'>
         <div class="panel panel-default">
-            <div class="panel-heading headerText">
+            <h3>
                 Character Tasks
                 
                 <span class="pull-right"><a href="{% url 'character_task_create' character_id=character.id %}"><button type="button" class="btn btn-success">New</button></a></span>    
                 
-            </div>
+            </h3>
                 <table class='table table-striped datatable-simple'>
                     <thead>
                         <tr>
@@ -47,4 +48,5 @@
         </div>
     </div>
     {% endif %}
+</div>
 {% endblock %}
