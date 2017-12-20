@@ -3,7 +3,35 @@
 
 {% block content %}
 <div class='row'>
+    <div class='col-md-8'>
+        <h3>Posts</h3>
+    </div>
     <div class='col-md-4'>
+        <div class="panel panel-default">
+            <h3>Recent Items
+                <span class="pull-right">
+                    <a class="h6 text-success" href="{% url 'item_create' %}">New</a>
+                </span>
+            </h3>
+            <div class="panel-body">
+                <table class='table table-striped table-hover table-condensed'>
+                    <thead>
+                        <tr>
+                            <th class='headerText'>Name</th>
+                            <th class='headerText'>Quantitiy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in recent_items %}
+                            <tr>
+                                <td class='bodyText'><a href="{% url 'item_detail' item.id %}">{{ item.name }}</a></td>
+                                <td class='bodyText'>{{ item.quantity }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="panel panel-default">
             <h3 class="">Recent Characters
                 <span class="pull-right">
@@ -29,8 +57,6 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div class='col-md-4'>
         <div class="panel panel-default">
             <h3>Recent Locations
                 <span class="pull-right">
@@ -58,8 +84,6 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div class='col-md-4'>
         <div class="panel panel-default">
             <h3>Recent Tasks
                 <span class="pull-right">
@@ -85,37 +109,6 @@
                 </table>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class='col-md-4'>
-        <div class="panel panel-default">
-            <h3>Recent Items
-                <span class="pull-right">
-                    <a class="h6 text-success" href="{% url 'item_create' %}">New</a>
-                </span>
-            </h3>
-            <div class="panel-body">
-                <table class='table table-striped table-hover table-condensed'>
-                    <thead>
-                        <tr>
-                            <th class='headerText'>Name</th>
-                            <th class='headerText'>Quantitiy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in recent_items %}
-                            <tr>
-                                <td class='bodyText'><a href="{% url 'item_detail' item.id %}">{{ item.name }}</a></td>
-                                <td class='bodyText'>{{ item.quantity }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class='col-md-4'>
         <div class="panel panel-default">
             <h3>Members
                 <span class="pull-right">

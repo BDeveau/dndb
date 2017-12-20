@@ -52,7 +52,7 @@ def overview(request, campaign_id):
         'campaign': Campaign.objects.get(id=campaign_id),
         'recent_locations': Location.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'recent_characters': Character.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
-        'recent_tasks': Task.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
+        'recent_tasks': Task.objects.filter(campaign=campaign_id, completed=False).order_by('-modified')[:5],
         'recent_items': Item.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
     })
 
