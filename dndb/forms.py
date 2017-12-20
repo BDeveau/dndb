@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
-from dndb.models import Character, Location, Task, PartyLoot, Campaign, Item
+from dndb.models import Character, Location, Task, PartyLoot, Campaign, Item, Post, Comment
 
 
 class CharacterForm(ModelForm):
@@ -37,3 +37,17 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'first_name', 'last_name']
+
+
+class PostForm(ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ['title', 'body']
+
+
+class CommentForm(ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ['body']

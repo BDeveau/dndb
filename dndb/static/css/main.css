@@ -26,3 +26,9 @@ table tbody tr td, table thead tr th{
 table.table-hover tbody tr:hover {
     background-color: #d0d5b1;
 }
+.post-footer {
+    font-size: 0.75em;
+}
+div.card {
+    background: transparent;
+}

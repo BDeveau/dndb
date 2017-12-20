@@ -8,8 +8,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.core.urlresolvers import reverse_lazy, reverse
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Location, Character, Campaign, Task, Item, Post
-from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm
+from .models import Location, Character, Campaign, Task, Item, Post, Comment
+from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm, PostForm, CommentForm
 import sys
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -302,6 +302,129 @@ def item_create(request, **kwargs):
             messages.error(request, form.errors)
 
     return render(request, 'dndb/item_detail.html', {
+        'form': form
+    })
+
+
+@login_required
+def post_detail(request, post_id):
+    post = Post.objects.get(id=post_id)
+    form = CommentForm()
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            p = form.save(commit=False)
+            # more stuff if needed
+            p.author = request.user
+            p.post = post
+            p.save()
+            messages.success(request, 'Comment Posted.')
+            return redirect('post_detail', post_id=post.id)
+        else:
+            messages.error(request, form.errors)
+
+    return render(request, 'dndb/post_detail.html', {
+        'edit': False,
+        'form': form,
+        'post': post
+    })
+
+
+@login_required
+def post_edit(request, post_id):
+    post = Post.objects.get(id=post_id)
+    form = PostForm(instance=post)
+
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if 'delete' in request.POST:
+            post.delete()
+            messages.warning(request, 'Post DELETED.')
+            return redirect('overview', campaign_id=request.session['campaign_id'])
+        if form.is_valid():
+            p = form.save(commit=False)
+            # more stuff if needed
+            p.save()
+            messages.success(request, 'Post Updated.')
+            return redirect('post_detail', post_id=post.id)
+        else:
+            messages.error(request, form.errors)
+
+    return render(request, 'dndb/post_detail.html', {
+        'edit': True,
+        'form': form,
+        'post': post
+    })
+
+
+@login_required
+def post_create(request, **kwargs):
+    form = PostForm()
+
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            p = form.save(commit=False)
+            p.campaign = Campaign.objects.get(
+                id=request.session['campaign_id'])
+            p.author = request.user
+            p.save()
+            messages.success(request, 'New Post Created.')
+            return redirect('post_detail', post_id=p.id)
+        else:
+            messages.error(request, form.errors)
+
+    return render(request, 'dndb/post_detail.html', {
+        'edit': True,
+        'form': form
+    })
+
+
+@login_required
+def comment_detail(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    form = CommentForm(instance=comment)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if 'delete' in request.POST:
+            comment.delete()
+            messages.warning(request, 'Comment DELETED.')
+            return redirect('overview', campaign_id=request.session['campaign_id'])
+        if form.is_valid():
+            p = form.save(commit=False)
+            # more stuff if needed
+            p.save()
+            messages.success(request, 'Comment Updated.')
+            return redirect('comment_detail', comment_id=comment.id)
+        else:
+            messages.error(request, form.errors)
+
+    return render(request, 'dndb/comment_detail.html', {
+        'form': form,
+        'comment': comment
+    })
+
+
+@login_required
+def comment_create(request, **kwargs):
+    form = CommentForm()
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            p = form.save(commit=False)
+            p.campaign = Campaign.objects.get(
+                id=request.session['campaign_id'])
+            p.author = request.user
+            p.save()
+            messages.success(request, 'New Comment Created.')
+            return redirect('comment_detail', post_id=p.id)
+        else:
+            messages.error(request, form.errors)
+
+    return render(request, 'dndb/comment_detail.html', {
         'form': form
     })
 
