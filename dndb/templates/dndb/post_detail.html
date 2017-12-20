@@ -19,7 +19,7 @@
                     <button type="submit" name="delete" class="btn btn-danger">Delete</button>
                 </form>
             {% else %}
-                <p>{{ post.body}}</p>
+                <p>{{ post.body|linebreaksbr }}</p>
                 {% if request.user == post.author %}
                     <a class="btn btn-small btn-secondary" href="{% url 'post_edit' post.id %}">Edit</a>
                 {% endif %}
@@ -27,9 +27,9 @@
                 {% for comment in post.comments.all %}
                     <div class="card">
                         <div class="card-body">
-                            {{ comment.body }}
+                            {{ comment.body|linebreaksbr }}
                         </div>
-                        <p class="post-footer text-right"> posted by {{ comment.author }} on {{comment.created }}</p>
+                        <p class="post-footer text-right"> posted by {{ comment.author }} {{comment.created|timesince }} ago</p>
                     </div>
                 {% endfor %}
             {% endif %}

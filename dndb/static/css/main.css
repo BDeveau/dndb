@@ -27,8 +27,22 @@ table.table-hover tbody tr:hover {
     background-color: #d0d5b1;
 }
 .post-footer {
+    overflow: hidden;
+    padding: 0.5em;
     font-size: 0.75em;
+    background-color: #e0e5c1;
 }
 div.card {
     background: transparent;
+}
+.phb {
+    width: auto;
+    height: auto;
+    overflow: auto;
+}
+.phb table tbody tr:nth-child(even) {
+    background-color: #e0e5c1;
+}
+.phb table tbody tr:nth-child(odd) {
+    background-color: transparent;
 }

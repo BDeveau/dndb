@@ -12,11 +12,11 @@
         </h3>
         {% for post in recent_posts %}
             <a href="{% url 'post_detail' post.id %}"><h4>{{ post.title }}</h4></a>
-            <p>{{ post.body }}</p>
-            <p class='post-footer text-left'>
+            <p>{{ post.body|linebreaksbr|truncatewords:100 }}</p>
+            <div class='post-footer text-left'>
                 <span class='pull-left'>comments: {{ post.comments.all|length }}</span>
-                <span class='pull-right'>posted by: {{ post.author }} on {{ post.created }}</span>
-            </p>
+                <span class='pull-right'>posted by: {{ post.author }} {{ post.created|timesince }} ago</span>
+            </div>
         {% endfor %}
     </div>
     <div class='col-md-4'>
