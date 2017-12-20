@@ -8,7 +8,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.core.urlresolvers import reverse_lazy, reverse
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Location, Character, Campaign, Task, Item
+from .models import Location, Character, Campaign, Task, Item, Post
 from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm
 import sys
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -54,6 +54,7 @@ def overview(request, campaign_id):
         'recent_characters': Character.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
         'recent_tasks': Task.objects.filter(campaign=campaign_id, completed=False).order_by('-modified')[:5],
         'recent_items': Item.objects.filter(campaign=campaign_id).order_by('-modified')[:5],
+        'recent_posts': Post.objects.filter(campaign=campaign_id).order_by('-created')[:10],
     })
 
 

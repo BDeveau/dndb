@@ -4,7 +4,20 @@
 {% block content %}
 <div class='row'>
     <div class='col-md-8'>
-        <h3>Posts</h3>
+        <h3>
+            Posts
+            <span class="pull-right">
+                <a class="h6 text-success" href="{% url 'item_create' %}">New</a>
+            </span>
+        </h3>
+        {% for post in recent_posts %}
+            <h4>{{ post.title }}</h4>
+            <p>{{ post.body }}</p>
+            <p class='post-footer text-left'>
+                <span class='pull-left'>comments: {{ post.comments }}</span>
+                <span class='pull-right'>posted by: {{ post.author }} on {{ post.created }}</span>
+            </p>
+        {% endfor %}
     </div>
     <div class='col-md-4'>
         <div class="panel panel-default">

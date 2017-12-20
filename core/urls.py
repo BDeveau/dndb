@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^$', dndb.views.index, name='index'),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'index'}, name='logout'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls), name='admin'),
     
     
     url(r'^register/$', dndb.views.register_user.as_view(), name='register'),

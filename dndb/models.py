@@ -125,7 +125,7 @@ class Post(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 class Comment(models.Model):
@@ -136,6 +136,3 @@ class Comment(models.Model):
         User, related_name='comments', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
