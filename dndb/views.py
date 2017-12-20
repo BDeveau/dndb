@@ -27,6 +27,7 @@ def index(request):
             {'name': "REST Framework"}
         ],
         'completed': [
+            {'name': "Posts and Comments"},
             {'name': "New Style"}
         ]
     })
