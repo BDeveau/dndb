@@ -38,11 +38,6 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AddField(
-            model_name='location',
-            name='location_type',
-            field=models.CharField(blank=True, max_length=20, null=True),
-        ),
-        migrations.AddField(
             model_name='comment',
             name='post',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='dndb.Post'),
