@@ -20,3 +20,9 @@ a, a:hover {
 .pagination {
     list-style-type: none !important;
 }
+table tbody tr td, table thead tr th{
+  border: none !important;
+}
+table.table-hover tbody tr:hover {
+    background-color: #d0d5b1;
+}

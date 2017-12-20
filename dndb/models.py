@@ -112,3 +112,24 @@ class PartyLoot(models.Model):
 
     def __str__(self):
         return self.campaign.name
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=50, null=False, blank=False)
+    body = models.TextField(null=False, blank=False)
+    campaign = models.ForeignKey(
+        Campaign, related_name='posts', on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        User, related_name='posts', on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+
+class Comment(models.Model):
+    body = models.TextField(null=False, blank=False)
+    post = models.ForeignKey(
+        Post, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        User, related_name='comments', on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
