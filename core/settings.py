@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
+AUTH_USER_MODEL = 'dndb.models.User'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/

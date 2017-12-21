@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
 import sys
 
 """
@@ -9,6 +10,13 @@ Quests
 Party Loot
 
 """
+
+
+class User(AbstractUser):
+    USERNAME_FIELD = 'email'
+
+    def __str__(self):
+        return self.email
 
 
 class Campaign(models.Model):
