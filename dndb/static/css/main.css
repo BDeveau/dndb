@@ -80,7 +80,7 @@ textarea {
 }
 .navbar-dark .navbar-nav .nav-link {
     color: #fff !important;
-    text-shadow: 0px 2px #333 !important;
+    text-shadow: 0px 2px 2px #333 !important;
 }
 .breadcrumbs {
     display: none;
@@ -95,4 +95,23 @@ textarea {
     text-transform: uppercase;
     font-size: 0.8em;
     vertical-align: top;
+}
+.sidebar .list-group .list-group-item-action a {
+    color: #eee !important;
+    text-shadow: 0px 1px 2px #555;
+}
+.sidebar .list-group .list-group-item-action {
+    background-image: url("../img/sidebar-ribbon.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 75% 1.5em;
+    position: relative;
+    right: -1em;
+    -webkit-filter: drop-shadow(0px 2px 2px #333 );
+    filter: drop-shadow(0px 2px 2px #333);
+}
+.sidebar .list-group .list-group-item-action:hover,
+.sidebar .list-group .list-group-item-action.active {
+    background-image: url("../img/sidebar-ribbon-hover.png");
+    background-color: transparent;
 }
