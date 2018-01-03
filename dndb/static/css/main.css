@@ -50,18 +50,24 @@ div.card {
     background-color: transparent;
 }
 .navbar-brand {
-    background-image: url("../img/TempLogo2.png");
-    background-size: contain;
-    height: 98px;
-    width: 200px;
-    margin-top: -1.6em;
-    margin-bottom: -4em;
+    background-image: url("../img/DNDBLogo.png");
+    height: 100px;
+    width: 300px;
+    margin-top: -1.8em;
+    margin-bottom: -2em;
 }
 .navbar .container-fluid {
-    background-image: url("../img/dark-background-header.jpg");
+    background-image: url("../img/dndbBackground.jpg");
+    background-repeat: no-repeat;
+    background-position: center; 
     font-weight: 800;
     text-transform: uppercase;
     font-size: 0.8em;
+    background-color: #000;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff !important;
+    text-shadow: 0px 2px #333 !important;
 }
 .breadcrumbs {
     display: none;
