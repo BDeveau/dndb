@@ -1,6 +1,6 @@
 body {
     background-color: #ccc;
-    margin-top: 7em;
+    margin-top: 5em;
     background-image: url("../img/natural_paper.png");
 }
 a, a:hover {
@@ -40,8 +40,14 @@ div.card {
 .phb {
     width: auto;
     height: auto;
-    overflow: auto;
-    position:relative;
+    position: relative;
+    overflow: visible;
+}
+textarea {
+    width: 100%;
+}
+.phb p, .phb blockquote, .phb table {
+    overflow: visible;
 }
 .phb table tbody tr:nth-child(even) {
     background-color: #e0e5c1;
