@@ -15,7 +15,7 @@
             <h3>Recent Updates</h3>
             <ul class="">
                 {% for c in commits %}
-                    <li class="">{{ c.title }} <small class="delight">{{ c.time }}</small></li>
+                    <li class="">{{ c.commit.message }} <small class="delight">{{ c.commit.author.date }}</small></li>
                 {% endfor %}
             </ul>
         </div>
