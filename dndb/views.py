@@ -22,13 +22,10 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 # Create your views here.
 def index(request):
     commits = requests.get('https://api.github.com/repos/BDeveau/dndb/commits')
+    issues = requests.get('https://api.github.com/repos/BDeveau/dndb/issues')
 
     return render(request, 'index.html', {
-        'tasks': [
-            {'name': "Campaign Creation and Management"},
-            {'name': 'User Model Change'},
-            {'name': "REST Framework"}
-        ],
+        'issues': issues.json()[:10],
         'commits': commits.json()[:10]
     })
 

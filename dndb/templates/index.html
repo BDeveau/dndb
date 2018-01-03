@@ -21,10 +21,10 @@
         </div>
         
         <div class="col">
-            <h3>Next Up</h3>
+            <h3>To Do</h3>
             <ul class="">
-            {% for t in tasks %}
-                <li class="">{{ t.name }}</li>
+            {% for t in issues %}
+                <li class="">{{ t.title }}</li>
             {% endfor %}
             </ul>
         </div>
