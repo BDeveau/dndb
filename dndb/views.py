@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 from .models import Location, Character, Campaign, Task, Item, Post, Comment
 from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm, PostForm, CommentForm
 import sys
+import subprocess
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -20,16 +21,21 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 
 # Create your views here.
 def index(request):
+    output = subprocess.check_output(["git", "log", "-10", "--format='%s||%cr'"]).split("\n")
+    commits = []
+    for c in output:
+        data = c.split("||")
+        if data[0] != "":
+            commits.append({'title':data[0][1:], 'time':data[1][:-1]})
+
+
     return render(request, 'index.html', {
         'tasks': [
             {'name': "Campaign Creation and Management"},
             {'name': 'User Model Change'},
             {'name': "REST Framework"}
         ],
-        'completed': [
-            {'name': "Posts and Comments"},
-            {'name': "New Style"}
-        ]
+        'commits': commits
     })
 
 

@@ -43,6 +43,13 @@ div.card {
     position: relative;
     overflow: visible;
 }
+.phb .delight {
+    color: #a98d4a;
+}
+.phb small {
+    font-size: 75% !important;
+    font-weight: 300;
+}
 textarea {
     width: 100%;
 }
