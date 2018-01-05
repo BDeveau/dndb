@@ -29,7 +29,7 @@ def index(request):
 
 
     return render(request, 'index.html', {
-        'issues': issues
+        'issues': issues,
         'commits': commits
     })
 
