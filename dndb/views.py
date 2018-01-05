@@ -21,12 +21,16 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 
 # Create your views here.
 def index(request):
-    commits = requests.get('https://api.github.com/repos/BDeveau/dndb/commits')
-    issues = requests.get('https://api.github.com/repos/BDeveau/dndb/issues')
+    getCommits = requests.get('https://api.github.com/repos/BDeveau/dndb/commits')
+    getIssues = requests.get('https://api.github.com/repos/BDeveau/dndb/issues')
+
+    issues = issues.json()[:10] if getIssues.status_code == 200 else [{"message": "Data Not Available"},{"message": getIssues.reason}]
+    commits = commits.json()[:10] if getCommits.status_code == 200 else [{"title": "Data Not Available"},{"message": getIssues.reason}]
+
 
     return render(request, 'index.html', {
-        'issues': issues.json()[:10],
-        'commits': commits.json()[:10]
+        'issues': issues
+        'commits': commits
     })
 
 
