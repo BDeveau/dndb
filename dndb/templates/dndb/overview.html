@@ -15,7 +15,7 @@
             <p>{{ post.body|linebreaksbr|truncatewords:100 }}</p>
             <div class='post-footer text-left'>
                 <span class='pull-left'>comments: {{ post.comments.all|length }}</span>
-                <span class='pull-right'>posted by: {{ post.author }} {{ post.created|timesince }} ago</span>
+                <span class='pull-right'>posted by: {{ post.author.username }} {{ post.created|timesince }} ago</span>
             </div>
         {% endfor %}
     </div>

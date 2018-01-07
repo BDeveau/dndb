@@ -29,7 +29,7 @@
                         <div class="card-body">
                             {{ comment.body|linebreaksbr }}
                         </div>
-                        <p class="post-footer text-right"> posted by {{ comment.author }} {{comment.created|timesince }} ago</p>
+                        <p class="post-footer text-right"> posted by {{ comment.author.username }} {{comment.created|timesince }} ago</p>
                     </div>
                 {% endfor %}
             {% endif %}
