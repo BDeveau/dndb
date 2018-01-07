@@ -63,17 +63,15 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         """
-        Returns email instead of the fullname for the user.
+        Returns the fullname for the user.
         """
-        return email_to_name(self.email)
+        return self.first_name + " " + self.last_name
 
     def get_short_name(self):
         """
         Returns the short name for the user.
-        This function works the same as `get_full_name` method.
-        It's just included for django built-in user comparability.
         """
-        return self.get_full_name()
+        return self.first_name
 
     def __str__(self):
         return self.email
