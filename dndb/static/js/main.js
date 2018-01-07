@@ -22,9 +22,9 @@ $(document).ready(function(){
           'lengthMenu': '_MENU_'
         },
         dom: 
-        "<'row'<'col-sm-12'f>>" +
-        "<'row'<'col-sm-12'tr>>" +
-        "<'row'<'col-sm-6'l><'col-sm-6'p>>",
+        "<'row'<'col-12'f>>" +
+        "<'row'<'col-12'tr>>" +
+        "<'row'<'col-6'l><'col-6'p>>",
     });
     
     $('.datatable-simple .dataTables_filter label').css('float','left');
