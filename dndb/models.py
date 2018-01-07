@@ -3,16 +3,7 @@ from django.forms import ModelForm
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils.translation import gettext as _
 from django.core import validators
-
-
 import sys
-
-"""
-TODO:
-Quests
-Party Loot
-
-"""
 
 
 class User(AbstractBaseUser, PermissionsMixin):
