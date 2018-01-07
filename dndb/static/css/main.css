@@ -1,6 +1,6 @@
 body {
     background-color: #ccc;
-    margin-top: 7em;
+    margin-top: 5em;
     background-image: url("../img/natural_paper.png");
 }
 a, a:hover {
@@ -40,8 +40,21 @@ div.card {
 .phb {
     width: auto;
     height: auto;
-    overflow: auto;
-    position:relative;
+    position: relative;
+    overflow: visible;
+}
+.phb .delight {
+    color: #a98d4a;
+}
+.phb small {
+    font-size: 75% !important;
+    font-weight: 300;
+}
+textarea {
+    width: 100%;
+}
+.phb p, .phb blockquote, .phb table {
+    overflow: visible;
 }
 .phb table tbody tr:nth-child(even) {
     background-color: #e0e5c1;
@@ -50,18 +63,24 @@ div.card {
     background-color: transparent;
 }
 .navbar-brand {
-    background-image: url("../img/TempLogo2.png");
-    background-size: contain;
-    height: 98px;
-    width: 200px;
-    margin-top: -1.6em;
-    margin-bottom: -4em;
+    background-image: url("../img/DNDBLogo.png");
+    height: 100px;
+    width: 300px;
+    margin-top: -1.8em;
+    margin-bottom: -2em;
 }
 .navbar .container-fluid {
-    background-image: url("../img/dark-background-header.jpg");
+    background-image: url("../img/dndbBackground.jpg");
+    background-repeat: no-repeat;
+    background-position: center; 
     font-weight: 800;
     text-transform: uppercase;
     font-size: 0.8em;
+    background-color: #000;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff !important;
+    text-shadow: 0px 2px 2px #333 !important;
 }
 .breadcrumbs {
     display: none;
@@ -76,4 +95,23 @@ div.card {
     text-transform: uppercase;
     font-size: 0.8em;
     vertical-align: top;
+}
+.sidebar .list-group .list-group-item-action a {
+    color: #eee !important;
+    text-shadow: 0px 1px 2px #555;
+}
+.sidebar .list-group .list-group-item-action {
+    background-image: url("../img/sidebar-ribbon.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 75% 1.5em;
+    position: relative;
+    right: -1em;
+    -webkit-filter: drop-shadow(0px 2px 2px #333 );
+    filter: drop-shadow(0px 2px 2px #333);
+}
+.sidebar .list-group .list-group-item-action:hover,
+.sidebar .list-group .list-group-item-action.active {
+    background-image: url("../img/sidebar-ribbon-hover.png");
+    background-color: transparent;
 }

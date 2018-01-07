@@ -1,4 +1,10 @@
 {% load staticfiles %}
+{% url 'overview' request.session.campaign_id as overviewurl %}
+{% url 'characters' request.session.campaign_id as charactersurl %}
+{% url 'locations' request.session.campaign_id as locationsurl %}
+{% url 'tasks' request.session.campaign_id as tasksurl %}
+{% url 'items' request.session.campaign_id as itemsurl %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +21,8 @@
 </head>
 <body>
 <!-- NAV HEADER -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark px-0 mt-1">
-    <div class="container-fluid py-4 px-5 bg-dark justify-content-around shadowed">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark px-0 py-0 mt-0">
+    <div class="container-fluid py-3 px-5 justify-content-around shadowed">
         <div class="navbar-nav mr-5">
             <a class="navbar-brand" href="/"></a>
             <ul class="navbar-nav">
@@ -37,7 +43,7 @@
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                         {% if user.is_staff %}
                             <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'admin' ">Admin</a>
+                                <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
                             </div>
                         {% endif %}
                 </li>
@@ -55,29 +61,29 @@
     <div class='row'>
         {% block left-sidebar %}
         <!-- Sidebar -->
-        <div class='col mr-0'>
+        <div class='sidebar col mr-0'>
             <ul class="list-group">
                 {% if not user.is_authenticated %}
                     <li class="list-group-item-action d-flex justify-content-end"><a class="nav-link text-dark" href="{% url 'login' %}">Please Login</a></li>
                 {% else %}
                     {% if request.session.campaign %}
-                        <li class="list-group-item-action d-flex justify-content-end">
-                            <a class="nav-link text-dark" href="{% url 'overview' request.session.campaign_id %}"><span class="glyphicon glyphicon-paperclip"></span> Overview</a>
+                        <li class="list-group-item-action d-flex justify-content-end {% ifequal request.path overviewurl %}active{% endifequal %}">
+                            <a class="nav-link text-dark" href="{% url 'overview' request.session.campaign_id %}"><span class="glyphicon glyphicon-paperclip"></span> Overview </a>
                         </li>
                         
-                        <li class="list-group-item-action d-flex justify-content-end">
+                        <li class="list-group-item-action d-flex justify-content-end {% ifequal request.path charactersurl %}active{% endifequal %}">
                             <a class="nav-link text-dark" href="{% url 'characters' request.session.campaign_id %}"><span class="glyphicon glyphicon-user"></span> Characters</a>
                         </li>
                         
-                        <li class="list-group-item-action d-flex justify-content-end">
+                        <li class="list-group-item-action d-flex justify-content-end {% ifequal request.path locationsurl %}active{% endifequal %}">
                             <a class="nav-link text-dark" href="{% url 'locations' request.session.campaign_id %}"><span class="glyphicon glyphicon-map-marker"></span> Locations</a>
                         </li>
                         
-                        <li class="list-group-item-action d-flex justify-content-end">
+                        <li class="list-group-item-action d-flex justify-content-end {% ifequal request.path tasksurl %}active{% endifequal %}">
                             <a class="nav-link text-dark" href="{% url 'tasks' request.session.campaign_id %}"><span class="glyphicon glyphicon-hourglass"></span> Tasks</a>
                         </li>
 
-                        <li class="list-group-item-action d-flex justify-content-end">
+                        <li class="list-group-item-action d-flex justify-content-end {% ifequal request.path itemsurl %}active{% endifequal %}">
                             <a class="nav-link text-dark" href="{% url 'items' request.session.campaign_id %}"><span class="glyphicon glyphicon-shopping-cart"></span> Items</a>
                         </li>
                     {% else %}

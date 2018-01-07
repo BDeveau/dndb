@@ -11,6 +11,7 @@ from django.forms import inlineformset_factory
 from .models import Location, Character, Campaign, Task, Item, Post, Comment
 from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm, PostForm, CommentForm
 import sys
+import requests
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -20,16 +21,16 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 
 # Create your views here.
 def index(request):
+    getCommits = requests.get('https://api.github.com/repos/BDeveau/dndb/commits')
+    getIssues = requests.get('https://api.github.com/repos/BDeveau/dndb/issues')
+
+    issues = getIssues.json()[:10] if getIssues.status_code == 200 else [{"message": "Data Not Available"},{"message": getIssues.reason}]
+    commits = getCommits.json()[:10] if getCommits.status_code == 200 else [{"title": "Data Not Available"},{"message": getIssues.reason}]
+
+
     return render(request, 'index.html', {
-        'tasks': [
-            {'name': "Campaign Creation and Management"},
-            {'name': 'User Model Change'},
-            {'name': "REST Framework"}
-        ],
-        'completed': [
-            {'name': "Posts and Comments"},
-            {'name': "New Style"}
-        ]
+        'issues': issues,
+        'commits': commits
     })
 
 
