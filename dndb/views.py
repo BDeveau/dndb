@@ -42,7 +42,7 @@ class campaigns(LoginRequiredMixin, ListView):
 
 class campaign_invite(LoginRequiredMixin, UpdateView):
     model = Campaign
-    fields = ['users']
+    fields = ['users__username']
 
     def get_success_url(self):
         return reverse('overview', kwargs={'campaign_id': self.object.id})

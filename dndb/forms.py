@@ -1,7 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from django.contrib.auth.models import User
-from dndb.models import Character, Location, Task, PartyLoot, Campaign, Item, Post, Comment
+from dndb.models import Character, Location, Task, PartyLoot, Campaign, Item, Post, Comment, User
 
 
 class CharacterForm(ModelForm):

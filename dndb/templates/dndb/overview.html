@@ -125,7 +125,9 @@
         <div class="panel panel-default">
             <h3>Members
                 <span class="pull-right">
-                    <a class="h6 text-success" href="{% url 'invite' campaign.id %}">Invite</a>
+                    {% if request.user == campaign.owner %}
+                        <a class="h6 text-success" href="{% url 'invite' campaign.id %}">Invite</a>
+                    {% endif %}
                 </span>
             </h3>
             <div class="panel-body">

@@ -25,8 +25,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         }
     )
     username = models.CharField(
-        _('Username'), max_length=30, unique=True, blank=True, null=True,
-        help_text=_('30 characters or fewer. Letters, numbers and _ only.'),
+        _('Username'), max_length=30, unique=True,
+        help_text=_('Your display name. 30 characters or fewer. Letters, numbers and _ only.'),
         validators=[
             validators.RegexValidator(
                 r'^\w+$',
@@ -36,7 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             ),
         ],
         error_messages={
-            'unique': _("The username is already taken."),
+            'unique': _("This username is already taken."),
         }
     )
     is_staff = models.BooleanField(
@@ -74,7 +74,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """
