@@ -40,6 +40,21 @@ class campaigns(LoginRequiredMixin, ListView):
         return Campaign.objects.filter(users=self.request.user)
 
 
+class campaign_create(LoginRequiredMixin, CreateView):
+    model = Campaign
+    fields = ['name']
+
+    def form_valid(self, form):
+        campaign = form.save(commit=False)
+        campaign.owner = self.request.user
+        campaign.save()
+        campaign.users.add(self.request.user)
+        campaign.save()
+        self.request.session['campaign'] = campaign.name
+        self.request.session['campaign_id'] = campaign.id
+        return redirect('overview', campaign_id=campaign.id)
+
+
 class campaign_invite(LoginRequiredMixin, UpdateView):
     model = Campaign
     fields = ['users']

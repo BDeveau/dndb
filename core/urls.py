@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^register/$', dndb.views.register_user.as_view(), name='register'),
 
     url(r'^campaigns/$', dndb.views.campaigns.as_view(), name='campaigns'),
+    url(r'^campaign/new/$', dndb.views.campaign_create.as_view(), name='campaign_create'),
     url(r'^campaign/(?P<campaign_id>[0-9]+)/$', dndb.views.overview, name='overview'),
     url(r'^campaign/(?P<pk>[0-9]+)/invite/$', dndb.views.campaign_invite.as_view(), name='invite'),
     url(r'^selectcampaign/(?P<campaign_id>[0-9]+)/$', dndb.views.selectcampaign, name='selectcampaign'),
