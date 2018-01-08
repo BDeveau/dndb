@@ -8,7 +8,7 @@
         <h3>
             Posts
             <span class="pull-right">
-                <a class="h6 text-success" href="{% url 'post_create' %}">New</a>
+                <a class="" href="{% url 'post_create' %}"><i class="fa fa-plus-square" title="New"></i></a>
             </span>
         </h3>
         {% for post in recent_posts %}
@@ -24,7 +24,7 @@
         <div class="panel panel-default">
             <h3>Recent Items
                 <span class="pull-right">
-                    <a class="h6 text-success" href="{% url 'item_create' %}">New</a>
+                    <a class="" href="{% url 'item_create' %}"><i class="fa fa-plus-square" title="New"></i></a>
                 </span>
             </h3>
             <div class="panel-body">
@@ -49,7 +49,7 @@
         <div class="panel panel-default">
             <h3 class="">Recent Characters
                 <span class="pull-right">
-                    <a class="h6 text-success" href="{% url 'character_create' %}">New</a>
+                    <a class="" href="{% url 'character_create' %}"><i class="fa fa-plus-square" title="New"></i></a>
                 </span>
             </h3>
             <div class="panel-body">
@@ -74,7 +74,7 @@
         <div class="panel panel-default">
             <h3>Recent Locations
                 <span class="pull-right">
-                    <a class="h6 text-success" href="{% url 'location_create' %}">New</a>
+                    <a class="" href="{% url 'location_create' %}"><i class="fa fa-plus-square" title="New"></i></a>
                 </span>
             </h3>
             <div class="panel-body">
@@ -101,7 +101,7 @@
         <div class="panel panel-default">
             <h3>Recent Tasks
                 <span class="pull-right">
-                    <a class="h6 text-success" href="{% url 'task_create' %}">New</a>
+                    <a class="" href="{% url 'task_create' %}"><i class="fa fa-plus-square" title="New"></i></a>
                 </span>
             </h3>
             <div class="panel-body">
@@ -127,7 +127,7 @@
             <h3>Members
                 <span class="pull-right">
                     {% if request.user == campaign.owner %}
-                        <a class="h6 text-success" href="{% url 'invite' campaign.id %}">Invite</a>
+                        <a class="" href="{% url 'invite' campaign.id %}"><i class="fa fa-plus-square" title="Invite"></i></a>
                     {% endif %}
                 </span>
             </h3>
