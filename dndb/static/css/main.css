@@ -118,3 +118,24 @@ textarea {
 .post a {
     border: #a98d4a 1px dashed;
 }
+.paginate_button a, .paginate_button {
+    color: #58180D;
+    padding: 2px 5px;
+    background: transparent !important;
+}
+.paginate_button.active a, .paginate_button a:hover, .paginate_button a:active {
+    color: #58180D !important;
+    border: #58180D 1px solid !important;
+}
+.paging_simple .paginate_button.disabled {
+    display: none !important;
+}
+.dataTables_filter, .dataTables_filter input {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    display: block !important;
+    padding: 2px;
+    width: 100%;
+}
