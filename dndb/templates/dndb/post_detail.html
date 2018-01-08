@@ -20,14 +20,14 @@
                     <button type="submit" name="delete" class="btn btn-danger">Delete</button>
                 </form>
             {% else %}
-                <p>{{ post.body|parse_bbcode|safe|linebreaksbr }}</p>
+                <p class="post">{{ post.body|parse_bbcode|safe|linebreaksbr }}</p>
                 {% if request.user == post.author %}
                     <a class="btn btn-small btn-secondary" href="{% url 'post_edit' post.id %}">Edit</a>
                 {% endif %}
                 <h4 class="mt-3">Comments:</h4>
                 {% for comment in post.comments.all %}
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body post">
                             {{ comment.body|parse_bbcode|safe|linebreaksbr }}
                         </div>
                         <p class="post-footer text-right"> posted by {{ comment.author.username }} {{comment.created|timesince }} ago</p>

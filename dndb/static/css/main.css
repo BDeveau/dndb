@@ -115,3 +115,6 @@ textarea {
     background-image: url("../img/sidebar-ribbon-hover.png");
     background-color: transparent;
 }
+.post a {
+    border: #a98d4a 1px dashed;
+}
