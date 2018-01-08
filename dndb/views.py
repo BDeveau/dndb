@@ -109,7 +109,7 @@ def character_detail(request, **kwargs):
     if 'character_id' in kwargs:
         character = Character.objects.get(id=kwargs['character_id'])
     else:
-        character = Character.objects.get(name__icontains=urllib.unquote(kwargs['character_name']))
+        character = Character.objects.get(name__icontains=urllib.unquote(kwargs['character_name'])).first()
 
     form = CharacterForm(instance=character)
     form.fields['location'].queryset = Location.objects.filter(
@@ -168,7 +168,7 @@ def location_detail(request, **kwargs):
     if 'location_id' in kwargs:
         location = Location.objects.get(id=kwargs['location_id'])
     else:
-        location = Location.objects.get(name__icontains=urllib.unquote(kwargs['location_name']))
+        location = Location.objects.get(name__icontains=urllib.unquote(kwargs['location_name'])).first()
 
     form = LocationForm(instance=location)
     form.fields['parent'].queryset = Location.objects.filter(
@@ -229,7 +229,7 @@ def task_detail(request, **kwargs):
     if 'task_id' in kwargs:
         task = Task.objects.get(id=kwargs['task_id'])
     else:
-        task = Task.objects.get(name__icontains=urllib.unquote(kwargs['task_name']))
+        task = Task.objects.get(name__icontains=urllib.unquote(kwargs['task_name'])).first()
 
     form = TaskForm(instance=task)
     form.fields['giver'].queryset = Character.objects.filter(
@@ -294,7 +294,7 @@ def item_detail(request, **kwargs):
     if 'item_id' in kwargs:
         item = Item.objects.get(id=kwargs['item_id'])
     else:
-        item = Item.objects.get(name__icontains=urllib.unquote(kwargs['item_name']))
+        item = Item.objects.get(name__icontains=urllib.unquote(kwargs['item_name'])).first()
 
     form = ItemForm(instance=item)
 
