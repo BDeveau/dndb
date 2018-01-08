@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bbcode_parser %}
 
 {% block content %}
     <div class="panel panel-default">
@@ -19,7 +20,7 @@
                     <button type="submit" name="delete" class="btn btn-danger">Delete</button>
                 </form>
             {% else %}
-                <p>{{ post.body|linebreaksbr }}</p>
+                <p>{{ post.body|parse_bbcode|safe|linebreaksbr }}</p>
                 {% if request.user == post.author %}
                     <a class="btn btn-small btn-secondary" href="{% url 'post_edit' post.id %}">Edit</a>
                 {% endif %}
@@ -27,7 +28,7 @@
                 {% for comment in post.comments.all %}
                     <div class="card">
                         <div class="card-body">
-                            {{ comment.body|linebreaksbr }}
+                            {{ comment.body|parse_bbcode|safe|linebreaksbr }}
                         </div>
                         <p class="post-footer text-right"> posted by {{ comment.author.username }} {{comment.created|timesince }} ago</p>
                     </div>

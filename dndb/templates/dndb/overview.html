@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load bbcode_parser %}
 
 {% block content %}
 <div class='row'>
@@ -12,7 +13,7 @@
         </h3>
         {% for post in recent_posts %}
             <a href="{% url 'post_detail' post.id %}"><h4>{{ post.title }}</h4></a>
-            <p>{{ post.body|linebreaksbr|truncatewords:100 }}</p>
+            <p>{{ post.body|parse_bbcode|safe|linebreaksbr|truncatewords:100 }}</p>
             <div class='post-footer text-left'>
                 <span class='pull-left'>comments: {{ post.comments.all|length }}</span>
                 <span class='pull-right'>posted by: {{ post.author.username }} {{ post.created|timesince }} ago</span>

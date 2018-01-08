@@ -12,6 +12,7 @@ from .models import Location, Character, Campaign, Task, Item, Post, Comment
 from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm, PostForm, CommentForm
 import sys
 import requests
+import urllib
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -104,8 +105,12 @@ def characters(request, campaign_id):
 
 
 @login_required
-def character_detail(request, character_id):
-    character = Character.objects.get(id=character_id)
+def character_detail(request, **kwargs):
+    if 'character_id' in kwargs:
+        character = Character.objects.get(id=kwargs['character_id'])
+    else:
+        character = Character.objects.get(name__icontains=urllib.unquote(kwargs['character_name']))
+
     form = CharacterForm(instance=character)
     form.fields['location'].queryset = Location.objects.filter(
         campaign=request.session['campaign_id'])
@@ -128,7 +133,7 @@ def character_detail(request, character_id):
     return render(request, 'dndb/character_detail.html', {
         'form': form,
         'character': character,
-        'tasks': Task.objects.filter(giver=character_id),
+        'tasks': Task.objects.filter(giver=character.id),
     })
 
 
@@ -159,8 +164,12 @@ def character_create(request, **kwargs):
 
 
 @login_required
-def location_detail(request, location_id):
-    location = Location.objects.get(id=location_id)
+def location_detail(request, **kwargs):
+    if 'location_id' in kwargs:
+        location = Location.objects.get(id=kwargs['location_id'])
+    else:
+        location = Location.objects.get(name__icontains=urllib.unquote(kwargs['location_name']))
+
     form = LocationForm(instance=location)
     form.fields['parent'].queryset = Location.objects.filter(
         campaign=request.session['campaign_id'])
@@ -216,8 +225,12 @@ def location_create(request, **kwargs):
 
 
 @login_required
-def task_detail(request, task_id):
-    task = Task.objects.get(id=task_id)
+def task_detail(request, **kwargs):
+    if 'task_id' in kwargs:
+        task = Task.objects.get(id=kwargs['task_id'])
+    else:
+        task = Task.objects.get(name__icontains=urllib.unquote(kwargs['task_name']))
+
     form = TaskForm(instance=task)
     form.fields['giver'].queryset = Character.objects.filter(
         campaign=request.session['campaign_id'])
@@ -277,8 +290,12 @@ def task_create(request, **kwargs):
 
 
 @login_required
-def item_detail(request, item_id):
-    item = Item.objects.get(id=item_id)
+def item_detail(request, **kwargs):
+    if 'item_id' in kwargs:
+        item = Item.objects.get(id=kwargs['item_id'])
+    else:
+        item = Item.objects.get(name__icontains=urllib.unquote(kwargs['item_name']))
+
     form = ItemForm(instance=item)
 
     if request.method == "POST":
