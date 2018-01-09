@@ -306,9 +306,10 @@ def item_detail(request, **kwargs):
         if form.is_valid():
             post = form.save(commit=False)
             # more stuff if needed
+            post.campaign_id = request.session['campaign_id']
             post.save()
             messages.success(request, 'Item Updated.')
-            return redirect('item_detail', item_id=item.id)
+            return redirect('item_detail', item_id=post.id)
         else:
             messages.error(request, form.errors)
 
