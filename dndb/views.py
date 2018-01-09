@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib import messages
@@ -8,7 +7,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.core.urlresolvers import reverse_lazy, reverse
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Location, Character, Campaign, Task, Item, Post, Comment
+from .models import Location, Character, Campaign, Task, Item, Post, Comment, User
 from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm, PostForm, CommentForm
 import sys
 import requests
