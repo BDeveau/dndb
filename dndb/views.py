@@ -25,9 +25,14 @@ def index(request):
     getCommits = requests.get('https://api.github.com/repos/BDeveau/dndb/commits')
     getIssues = requests.get('https://api.github.com/repos/BDeveau/dndb/issues')
 
-    issues = getIssues.json()[:10] if getIssues.status_code == 200 else [{"message": "Data Not Available"},{"message": getIssues.reason}]
-    commits = getCommits.json()[:10] if getCommits.status_code == 200 else [{"title": "Data Not Available"},{"message": getIssues.reason}]
-
+    issues = getIssues.json()[:10] if getIssues.status_code == 200 else [
+        {"message": "Data Not Available"},
+        {"message": getIssues.reason}
+    ]
+    commits = getCommits.json()[:10] if getCommits.status_code == 200 else [
+        {"title": "Data Not Available"},
+        {"message": getIssues.reason}
+    ]
 
     return render(request, 'index.html', {
         'issues': issues,
