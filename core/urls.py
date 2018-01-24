@@ -42,9 +42,9 @@ urlpatterns = [
     url(r'^character/(?P<character_id>[0-9]+)/task/new/$', dndb.views.task_create, name='character_task_create'),
 
     url(r'^campaign/(?P<campaign_id>[0-9]+)/tasks/$', dndb.views.tasks, name='tasks'),
+    url(r'^task/new/$', dndb.views.task_create, name='task_create'),
     url(r'^task/(?P<task_id>[0-9]+)/$', dndb.views.task_detail, name='task'),
     url(r'^task/(?P<task_name>[-\w\d\' ]+)/$', dndb.views.task_detail, name='taskByName'),
-    url(r'^task/new/$', dndb.views.task_create, name='task_create'),
 
     url(r'^campaign/(?P<campaign_id>[0-9]+)/items/$', dndb.views.items, name='items'),
     url(r'^item/(?P<item_id>[0-9]+)/$', dndb.views.item_detail, name='item_detail'),
