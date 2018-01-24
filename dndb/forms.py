@@ -43,6 +43,11 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'body']
+        help_texts = {
+            'body': 'You can create links by specifying what you\'re typing in brackets. For example'
+                    ' you can type: [character]Jonny[/character] or [location]Tavern[/location]',
+        }
+
 
 
 class CommentForm(ModelForm):
