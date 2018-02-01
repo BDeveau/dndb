@@ -21,8 +21,8 @@ LOGIN_REDIRECT_URL = 'index'
 AUTH_USER_MODEL = 'dndb.User'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'bdeveau@gmail.com'
-EMAIL_HOST_PASSWORD = 'Redandblue2258'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
