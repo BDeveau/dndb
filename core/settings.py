@@ -21,8 +21,8 @@ LOGIN_REDIRECT_URL = 'index'
 AUTH_USER_MODEL = 'dndb.User'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = os.environ['email_user']
+EMAIL_HOST_PASSWORD = os.environ['email_pass']
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -34,7 +34,7 @@ EMAIL_USE_TLS = True
 SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 # Application definition
