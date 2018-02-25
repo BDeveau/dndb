@@ -20,9 +20,9 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
 AUTH_USER_MODEL = 'dndb.User'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ['email_user']
-EMAIL_HOST_PASSWORD = os.environ['email_pass']
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ['SNEDGIRD_USERNAME']
+EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
