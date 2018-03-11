@@ -496,13 +496,13 @@ class register_user(CreateView):
     def form_valid(self, form):
         # save the new user first
         u = form.save(commit=False)
-        u.set_password(self.request.POST['password'])
+        u.set_password(self.request.POST.get('password'))
         u.save()
         # get the username and password
-        username = self.request.POST['username']
-        password = self.request.POST['password']
+        email = self.request.POST.get('email')
+        password = self.request.POST.get('password')
         # authenticate user then login
-        user = authenticate(username=username, password=password)
+        user = authenticate(email=email, password=password)
         login(self.request, user)
         return redirect('profile')
 
