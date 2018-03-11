@@ -83,10 +83,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
-class GMInfo(models.Model):
-    notes = models.TextField(null=True, blank=True)
-
-
 class Campaign(models.Model):
     name = models.CharField(max_length=50)
     users = models.ManyToManyField(User, related_name='campaigns')
@@ -107,7 +103,6 @@ class Location(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     location_type = models.CharField(max_length=20, null=True, blank=True)
-    gm_info = models.ForeignKey(GMInfo, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -146,7 +141,6 @@ class Character(models.Model):
         Campaign, related_name='characters', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    gm_info = models.ForeignKey(GMInfo, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -164,7 +158,6 @@ class Task(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     completed = models.BooleanField(default=False)
-    gm_info = models.ForeignKey(GMInfo, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -178,7 +171,6 @@ class Item(models.Model):
         Campaign, related_name='items', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    gm_info = models.ForeignKey(GMInfo, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
