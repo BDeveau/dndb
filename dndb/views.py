@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django import forms
 from django.forms import inlineformset_factory
 from .models import Location, Character, Campaign, Task, Item, Post, Comment, User
-from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm, PostForm, CommentForm
+from .forms import LocationForm, CharacterForm, TaskForm, UserForm, ItemForm, PostForm, CommentForm, SignupForm
 import sys
 import requests
 import urllib
@@ -491,14 +491,16 @@ def user_detail(request):
 
 class register_user(CreateView):
     model = User
-    form_class = UserCreationForm
+    form_class = SignupForm
 
     def form_valid(self, form):
         # save the new user first
-        form.save()
+        u = form.save(commit=False)
+        u.set_password(self.request.POST['password'])
+        u.save()
         # get the username and password
         username = self.request.POST['username']
-        password = self.request.POST['password1']
+        password = self.request.POST['password']
         # authenticate user then login
         user = authenticate(username=username, password=password)
         login(self.request, user)

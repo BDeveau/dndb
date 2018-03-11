@@ -38,6 +38,15 @@ class UserForm(ModelForm):
         fields = ['username', 'email', 'first_name', 'last_name']
 
 
+class SignupForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['email', 'password']
+        widgets = {
+            'password': forms.PasswordInput()
+        }
+
+
 class PostForm(ModelForm):
 
     class Meta:

@@ -139,3 +139,6 @@ textarea {
     padding: 2px;
     width: 100%;
 }
+#id_users_chosen .chosen-drop {
+    display: none;
+}
