@@ -180,16 +180,6 @@ class Item(models.Model):
         return self.name
 
 
-class PartyLoot(models.Model):
-    campaign = models.ForeignKey(
-        Campaign, related_name='partyloot', on_delete=models.CASCADE)
-    items = models.ManyToManyField(Item, blank=True)
-    notes = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return self.campaign.name
-
-
 class Post(models.Model):
     title = models.CharField(max_length=50, null=False, blank=False)
     body = models.TextField(null=False, blank=False)

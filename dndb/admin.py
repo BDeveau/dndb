@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Location, Character, Campaign, Task, PartyLoot, Item, Post, Comment
+from .models import User, Location, Character, Campaign, Task, Item, Post, Comment
 
 @admin.register(Campaign)
 class CampaignAdmin(admin.ModelAdmin):
@@ -15,7 +15,6 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(Location)
 admin.site.register(Character)
 admin.site.register(Task)
-admin.site.register(PartyLoot)
 admin.site.register(Item)
 admin.site.register(Post)
 admin.site.register(Comment)

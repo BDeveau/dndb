@@ -116,7 +116,12 @@ def character_detail(request, **kwargs):
     else:
         character = Character.objects.filter(name__icontains=urllib.unquote(kwargs['character_name'])).first()
 
-    form = CharacterForm(instance=character)
+    if request.user == Campaign.objects.get(id=request.session['campaign_id']).owner:
+        gm = True
+    else:
+        gm = False
+
+    form = CharacterForm(instance=character, gm=gm)
     form.fields['location'].queryset = Location.objects.filter(
         campaign=request.session['campaign_id'])
 
@@ -175,11 +180,17 @@ def location_detail(request, **kwargs):
     else:
         location = Location.objects.filter(name__icontains=urllib.unquote(kwargs['location_name'])).first()
 
-    form = LocationForm(instance=location)
+    if request.user == Campaign.objects.get(id=request.session['campaign_id']).owner:
+        gm = True
+    else:
+        gm = False
+
+    form = LocationForm(instance=location, gm=gm)
     form.fields['parent'].queryset = Location.objects.filter(
         campaign=request.session['campaign_id'])
 
     if request.method == "POST":
+        form = LocationForm(request.POST, instance=location)
         if 'delete' in request.POST:
             location.delete()
             messages.warning(request, 'Location DELETED.')
@@ -235,7 +246,12 @@ def task_detail(request, **kwargs):
     else:
         task = Task.objects.filter(name__icontains=urllib.unquote(kwargs['task_name'])).first()
 
-    form = TaskForm(instance=task)
+    if request.user == Campaign.objects.get(id=request.session['campaign_id']).owner:
+        gm = True
+    else:
+        gm = False
+
+    form = TaskForm(instance=task, gm=gm)
     form.fields['giver'].queryset = Character.objects.filter(
         campaign=request.session['campaign_id'])
     form.fields['location'].queryset = Location.objects.filter(
@@ -300,7 +316,12 @@ def item_detail(request, **kwargs):
     else:
         item = Item.objects.filter(name__icontains=urllib.unquote(kwargs['item_name'])).first()
 
-    form = ItemForm(instance=item)
+    if request.user == Campaign.objects.get(id=request.session['campaign_id']).owner:
+        gm = True
+    else:
+        gm = False
+
+    form = ItemForm(instance=item, gm=gm)
 
     if request.method == "POST":
         form = ItemForm(request.POST, instance=item)
