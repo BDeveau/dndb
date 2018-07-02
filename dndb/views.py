@@ -180,7 +180,6 @@ def location_detail(request, **kwargs):
         campaign=request.session['campaign_id'])
 
     if request.method == "POST":
-        form = LocationForm(request.POST, instance=location)
         if 'delete' in request.POST:
             location.delete()
             messages.warning(request, 'Location DELETED.')
